@@ -63,6 +63,7 @@ body {
 }
 
 .nav.visible { transform: translateY(0); }
+.nav.nav-always-visible { transform: translateY(0); }
 
 .nav-logo {
   font-family: 'Instrument Serif', serif;
@@ -70,6 +71,7 @@ body {
   font-weight: 400;
   color: var(--ink);
   letter-spacing: -0.02em;
+  text-decoration: none;
 }
 
 .nav-links {
@@ -628,6 +630,68 @@ p.lead {
   display: block;
 }
 
+/* VIEW PANES */
+#report-views { position: relative; }
+.view-pane {
+  display: none;
+  min-height: 100vh;
+}
+.view-pane.active {
+  display: block;
+}
+.view-pane .view-inner {
+  padding-bottom: 4rem;
+}
+
+/* HOME SECTION CARDS */
+.home-section-cards {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.home-section-card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--light-line);
+  border-radius: 12px;
+  padding: 1.5rem 1.8rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.home-section-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  color: var(--ink);
+}
+.home-section-card .card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+.home-section-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.35rem;
+}
+.home-section-card p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+.home-explore-label {
+  text-align: center;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
 /* RESPONSIVE */
 @media (max-width: 500px) {
   html { font-size: 15px; }
@@ -635,15 +699,18 @@ p.lead {
   .section, .cluster { padding: 3rem 1.5rem; }
   .nav-links { display: none; }
   .hero-meta { flex-direction: column; align-items: center; gap: 0.8rem; }
+  .home-section-cards { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
 }
 </style>
 </head>
 <body>
 
 <!-- NAVIGATION -->
-<nav class="nav" id="nav">
-  <div class="nav-logo">The Community Paradox</div>
+<nav class="nav nav-always-visible" id="nav">
+  <a href="#home" class="nav-logo">The Community Paradox</a>
   <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#context">Context</a></li>
     <li><a href="#landscape">Landscape</a></li>
     <li><a href="#leaders">Leaders</a></li>
     <li><a href="#findings">Findings</a></li>
@@ -651,80 +718,111 @@ p.lead {
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-overline">An Insight Report by MAJORITI</div>
-  <h1>The Community <em>Paradox</em></h1>
-  <p class="hero-sub">
-    Not a company. Not a friendship. Not quite a family.<br>
-    Insights from 12 leaders building something the world doesn't have a name for yet.
-  </p>
-  <div class="hero-meta">
-    <span>📍 12 interviews</span>
-    <span>🌎 4 countries</span>
-    <span>🔬 6 pain clusters</span>
-    <span>📅 2025</span>
-  </div>
-  <div class="scroll-hint">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-    Scroll to explore
-  </div>
-</section>
-
-<!-- AT A GLANCE -->
-<div class="section fade-in">
-  <div class="glance-grid">
-    <div class="glance-stat">
-      <div class="number">12</div>
-      <div class="label">Leaders interviewed</div>
+<div id="report-views">
+  <!-- VIEW: HOME -->
+  <div id="view-home" class="view-pane active">
+    <section class="hero">
+      <div class="hero-overline">An Insight Report by MAJORITI</div>
+      <h1>The Community <em>Paradox</em></h1>
+      <p class="hero-sub">
+        Not a company. Not a friendship. Not quite a family.<br>
+        Insights from 12 leaders building something the world doesn't have a name for yet.
+      </p>
+      <div class="hero-meta">
+        <span>📍 12 interviews</span>
+        <span>🌎 4 countries</span>
+        <span>🔬 6 pain clusters</span>
+        <span>📅 2025</span>
+      </div>
+      <div class="scroll-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        Choose a section to explore
+      </div>
+    </section>
+    <div class="section fade-in">
+      <div class="glance-grid">
+        <div class="glance-stat">
+          <div class="number">12</div>
+          <div class="label">Leaders interviewed</div>
+        </div>
+        <div class="glance-stat">
+          <div class="number">100%</div>
+          <div class="label">Use WhatsApp as primary tool</div>
+        </div>
+        <div class="glance-stat">
+          <div class="number">0</div>
+          <div class="label">Started with a "community plan"</div>
+        </div>
+      </div>
     </div>
-    <div class="glance-stat">
-      <div class="number">100%</div>
-      <div class="label">Use WhatsApp as primary tool</div>
-    </div>
-    <div class="glance-stat">
-      <div class="number">0</div>
-      <div class="label">Started with a "community plan"</div>
+    <p class="home-explore-label">Explore the report</p>
+    <div class="home-section-cards">
+      <a href="#context" class="home-section-card">
+        <div class="card-icon">📋</div>
+        <h3>Context</h3>
+        <p>Why this report exists</p>
+      </a>
+      <a href="#landscape" class="home-section-card">
+        <div class="card-icon">🗺</div>
+        <h3>Landscape</h3>
+        <p>A taxonomy of communities</p>
+      </a>
+      <a href="#leaders" class="home-section-card">
+        <div class="card-icon">👤</div>
+        <h3>Leaders</h3>
+        <p>Four kinds of community leaders</p>
+      </a>
+      <a href="#findings" class="home-section-card">
+        <div class="card-icon">🔬</div>
+        <h3>Findings</h3>
+        <p>The 6 pain clusters</p>
+      </a>
+      <a href="#closing" class="home-section-card">
+        <div class="card-icon">✦</div>
+        <h3>Takeaways</h3>
+        <p>Five things we'll remember</p>
+      </a>
     </div>
   </div>
-</div>
 
-<hr class="section-divider">
-
-<!-- INTRO -->
-<section class="section fade-in">
-  <div class="section-number">00 — Context</div>
-  <h2>Why this report exists</h2>
-  <p class="lead">
-    We set out to understand what communities actually are — and what holds them back. Not from textbooks, but from the people building them with their own hands, time, and often their own money.
-  </p>
-  <p>
-    We interviewed 12 community leaders across Israel, Latin America, and the U.S. Their communities range from a slime mold enthusiast group to one of the world's top scientific institutions. From a fitness movement in Panama City to a Kabbalah study circle over Zoom. From a university alumni network to a food rescue nonprofit. 
-  </p>
-  <p>
-    What they share is more interesting than what separates them. Every single one described a moment of accidental discovery — a realization that what they were building was bigger than the project, the class, or the event. It was a living thing.
-  </p>
-  <p>
-    This report maps the landscape, names the pain, and asks the questions that emerged from those conversations.
-  </p>
-
-  <div class="toc">
-    <a href="#landscape">🗺 Landscape</a>
-    <a href="#leaders">👤 Leader Types</a>
-    <a href="#c1">🧩 Leadership</a>
-    <a href="#c2">🌱 Emergence</a>
-    <a href="#c3">🚧 Missed Potential</a>
-    <a href="#c4">📢 Communication</a>
-    <a href="#c5">🧭 Identity</a>
-    <a href="#c6">🔁 Participation</a>
-    <a href="#closing">✦ Takeaways</a>
+  <!-- VIEW: CONTEXT -->
+  <div id="view-context" class="view-pane">
+    <div class="view-inner">
+      <section class="section fade-in">
+        <div class="section-number">00 — Context</div>
+        <h2>Why this report exists</h2>
+        <p class="lead">
+          We set out to understand what communities actually are — and what holds them back. Not from textbooks, but from the people building them with their own hands, time, and often their own money.
+        </p>
+        <p>
+          We interviewed 12 community leaders across Israel, Latin America, and the U.S. Their communities range from a slime mold enthusiast group to one of the world's top scientific institutions. From a fitness movement in Panama City to a Kabbalah study circle over Zoom. From a university alumni network to a food rescue nonprofit. 
+        </p>
+        <p>
+          What they share is more interesting than what separates them. Every single one described a moment of accidental discovery — a realization that what they were building was bigger than the project, the class, or the event. It was a living thing.
+        </p>
+        <p>
+          This report maps the landscape, names the pain, and asks the questions that emerged from those conversations.
+        </p>
+        <div class="toc">
+          <a href="#landscape">🗺 Landscape</a>
+          <a href="#leaders">👤 Leader Types</a>
+          <a href="#findings">🔬 Findings</a>
+          <a href="#c1">🧩 Leadership</a>
+          <a href="#c2">🌱 Emergence</a>
+          <a href="#c3">🚧 Missed Potential</a>
+          <a href="#c4">📢 Communication</a>
+          <a href="#c5">🧭 Identity</a>
+          <a href="#c6">🔁 Participation</a>
+          <a href="#closing">✦ Takeaways</a>
+        </div>
+      </section>
+    </div>
   </div>
-</section>
 
-<hr class="section-divider">
-
-<!-- TAXONOMY: COMMUNITY TYPES -->
-<section class="section-wide fade-in" id="landscape">
+  <!-- VIEW: LANDSCAPE -->
+  <div id="view-landscape" class="view-pane">
+    <div class="view-inner">
+      <section class="section-wide fade-in" id="landscape">
   <div style="max-width:820px;margin:0 auto;">
     <div class="section-number">01 — The Landscape</div>
     <h2>A taxonomy of communities</h2>
@@ -767,11 +865,13 @@ p.lead {
     </div>
   </div>
 </section>
+    </div>
+  </div>
 
-<hr class="section-divider">
-
-<!-- TAXONOMY: LEADER TYPES -->
-<section class="section-wide fade-in" id="leaders">
+  <!-- VIEW: LEADERS -->
+  <div id="view-leaders" class="view-pane">
+    <div class="view-inner">
+      <section class="section-wide fade-in" id="leaders">
   <div style="max-width:820px;margin:0 auto;">
     <div class="section-number">02 — Leader Types</div>
     <h2>Four kinds of community leaders</h2>
@@ -813,11 +913,13 @@ p.lead {
     </div>
   </div>
 </section>
+    </div>
+  </div>
 
-<hr class="section-divider">
-
-<!-- FINDINGS HEADER -->
-<section class="section fade-in" id="findings">
+  <!-- VIEW: FINDINGS -->
+  <div id="view-findings" class="view-pane">
+    <div class="view-inner">
+      <section class="section fade-in" id="findings">
   <div class="section-number">03 — The 6 Pain Clusters</div>
   <h2>What keeps community leaders up at night</h2>
   <p class="lead">
@@ -1048,11 +1150,13 @@ p.lead {
 
   <div class="provocation">What if lurkers aren't a problem to solve — but the foundation that makes active participation possible?</div>
 </div>
+    </div>
+  </div>
 
-<hr class="section-divider">
-
-<!-- CLOSING -->
-<section class="closing fade-in" id="closing">
+  <!-- VIEW: CLOSING -->
+  <div id="view-closing" class="view-pane">
+    <div class="view-inner">
+      <section class="closing fade-in" id="closing">
   <div class="section-number">04 — What we take from here</div>
   <h2>Five things we'll remember</h2>
 
@@ -1083,6 +1187,9 @@ p.lead {
     This is a living document. The research continues with member interviews and a deeper analysis of community structures. If you're a leader who sees yourself in these pages — we'd love to hear from you.
   </p>
 </section>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -1091,48 +1198,74 @@ p.lead {
 </footer>
 
 <script>
-// Sticky nav on scroll
-const nav = document.getElementById('nav');
-let lastScroll = 0;
+(function() {
+  const VIEW_IDS = ['home', 'context', 'landscape', 'leaders', 'findings', 'closing'];
+  const FINDINGS_SUB = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
 
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset;
-  if (currentScroll > window.innerHeight * 0.5) {
-    nav.classList.add('visible');
-  } else {
-    nav.classList.remove('visible');
+  function getViewIdFromHash() {
+    const hash = (window.location.hash || '#').slice(1).toLowerCase();
+    if (VIEW_IDS.includes(hash)) return hash;
+    if (FINDINGS_SUB.includes(hash)) return 'findings';
+    return 'home';
   }
-  lastScroll = currentScroll;
-});
 
-// Intersection Observer for fade-in
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
+  function showView(viewId) {
+    const panes = document.querySelectorAll('#report-views .view-pane');
+    const wasActive = document.querySelector('#report-views .view-pane.active');
+    panes.forEach(pane => {
+      pane.classList.remove('active');
+      if (pane.id === 'view-' + viewId) pane.classList.add('active');
+    });
+    const switched = !wasActive || wasActive.id !== 'view-' + viewId;
+    if (switched) window.scrollTo(0, 0);
+    // If hash is a findings sub-anchor, scroll to it after view is visible
+    const hash = (window.location.hash || '').slice(1).toLowerCase();
+    if (FINDINGS_SUB.includes(hash)) {
+      const el = document.getElementById(hash);
+      if (el) {
+        requestAnimationFrame(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+    }
+    // Reveal fade-in elements in active pane
+    const activePane = document.getElementById('view-' + viewId);
+    if (activePane) {
+      activePane.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+    }
+  }
 
+  function applyRoute() {
+    const viewId = getViewIdFromHash();
+    showView(viewId);
+  }
+
+  window.addEventListener('hashchange', applyRoute);
+  window.addEventListener('load', applyRoute);
+
+  // Intercept in-page hash links: switch view instead of default scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = (this.getAttribute('href') || '').trim();
+      if (href === '#') return;
+      const id = href.slice(1).toLowerCase();
+      const isView = VIEW_IDS.includes(id) || FINDINGS_SUB.includes(id);
+      if (isView) {
+        e.preventDefault();
+        window.location.hash = id;
+      }
+    });
+  });
+})();
+
+// Intersection Observer for fade-in (elements in visible pane)
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 }, observerOptions);
-
-document.querySelectorAll('.fade-in').forEach(el => {
-  observer.observe(el);
-});
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
 </body>

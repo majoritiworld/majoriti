@@ -9,7 +9,7 @@
 :root {
   --ink: #1a1a18;
   --paper: #f5f0e8;
-  --accent: #c84b31;
+  --accent: #94a200;
   --accent2: #2d6a4f;
   --muted: #8a8578;
   --light-line: #d9d3c7;
@@ -100,7 +100,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 7rem;
   position: relative;
   overflow: hidden;
 }
@@ -513,7 +513,7 @@ p.lead {
 .glance-stat .number {
   font-family: 'Instrument Serif', serif;
   font-size: 2.8rem;
-  color: var(--accent);
+  color: var(--ink);
   line-height: 1;
 }
 
@@ -704,12 +704,27 @@ p.lead {
   margin-bottom: 0;
   line-height: 1.5;
 }
+.home-disclaimer {
+  max-width: 900px;
+  margin: 2rem auto 3rem;
+  padding: 2rem;
+  background: var(--ink);
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.home-disclaimer,
+.home-disclaimer p {
+  color: var(--paper);
+}
+
 .home-explore-label {
   text-align: center;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--muted);
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -748,12 +763,6 @@ p.lead {
       <p class="hero-sub">
         Communities are everywhere, yet leaders are building them intuitively, one crisis at a time, without the tools or structures to sustain what they've created.
       </p>
-      <div class="scroll-hint">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-        Choose a section to explore
-      </div>
-    </section>
-    <div class="section fade-in">
       <div class="glance-grid">
         <div class="glance-stat">
           <div class="number">🌍 13</div>
@@ -768,8 +777,15 @@ p.lead {
           <div class="label">Key Insights</div>
         </div>
       </div>
-    </div>
-    <p class="home-explore-label">Explore the report</p>
+      <div class="home-disclaimer">
+        <p>This report was built after 13 interviews with people in leadership positions across communities. We hope it brings clarity on the kinds of communities and leaders that exist, the main pain points they share, and actionable insights you can use in your own community.</p>
+      </div>
+      <div class="scroll-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        Choose a section to explore
+      </div>
+    </section>
+    <p class="home-explore-label">Click a section below to jump there, or use the menu above to move through the report.</p>
     <div class="home-section-cards">
       <a href="#context" class="home-section-card">
         <div class="card-icon">📋</div>
@@ -809,7 +825,7 @@ p.lead {
           We set out to understand what communities actually are — and what holds them back. Not from textbooks, but from the people building them with their own hands, time, and often their own money.
         </p>
         <p>
-          We interviewed 12 community leaders across Israel, Latin America, and the U.S. Their communities range from a slime mold enthusiast group to one of the world's top scientific institutions. From a fitness movement in Panama City to a Kabbalah study circle over Zoom. From a university alumni network to a food rescue nonprofit. 
+          We interviewed 13 community leaders across Israel, Latin America, and the U.S. Their communities range from a slime mold enthusiast group to one of the world's top scientific institutions. From a fitness movement in Panama City to a Kabbalah study circle over Zoom. From a university alumni network to a food rescue nonprofit. 
         </p>
         <p>
           What they share is more interesting than what separates them. Every single one described a moment of accidental discovery — a realization that what they were building was bigger than the project, the class, or the event. It was a living thing.
@@ -970,7 +986,7 @@ p.lead {
   <div class="section-number">03 — The 6 Pain Clusters</div>
   <h2>What keeps community leaders up at night</h2>
   <p class="lead">
-    Across 12 very different communities, we kept hearing the same six tensions. These aren't just "problems to solve" — they're structural paradoxes that every community must navigate. Here they are, in the leaders' own words.
+    Across 13 very different communities, we kept hearing the same six tensions. These aren't just "problems to solve" — they're structural paradoxes that every community must navigate. Here they are, in the leaders' own words.
   </p>
 </section>
 

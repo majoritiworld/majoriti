@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Majoriti AI — Human-Centered AI Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Majoriti';
+  src: url('fonts/majoriti.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --ink: #1a1a18;
+  --paper: #f5f0e8;
+  --accent: #94a200;
+  --accent2: #C9A0CA;
+  --muted: #8a8578;
+  --light-line: #d9d3c7;
+  --quote-bg: #ece7db;
+  --card-bg: #faf7f1;
+  --mobile-gutter: 1.5rem;
+  --nav-height: 3.25rem;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 17px;
+  scroll-padding-top: var(--nav-height);
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-content {
+  padding-left: max(var(--mobile-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--mobile-gutter), env(safe-area-inset-right));
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* NAVIGATION */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(245,240,232,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--light-line);
+  padding: 0.6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Majoriti', 'Instrument Serif', serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--ink); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--ink);
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: calc(var(--nav-height) + 6rem) 2rem 7rem;
+  position: relative;
+  overflow: visible;
+  background: #284032;
+  color: var(--paper);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 120%;
+  height: 140%;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(200,75,49,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(45,106,79,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(91,74,138,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  max-width: 1040px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-lead {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--paper);
+  max-width: 740px;
+  margin-top: 2rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(245, 240, 232, 0.78);
+  max-width: 740px;
+  margin-top: 1rem;
+  line-height: 1.75;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-accent {
+  color: var(--accent);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  background: transparent;
+  color: var(--paper);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 100px;
+  border: 2px solid rgba(245, 240, 232, 0.5);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--paper);
+  color: var(--paper);
+  transform: translateY(-1px);
+}
+
+/* SECTIONS */
+.section {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.section h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.section h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.section p {
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.section .lead {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: #444;
+}
+
+.section-intro {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+/* CARDS */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.card-grid-4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 900px) {
+  .card-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Only the card grid: match cta-section width (1040px); section text stays 940px */
+@media (min-width: 1100px) {
+  .section .card-grid {
+    max-width: 1040px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+  }
+}
+
+@media (max-width: 800px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .card-grid-4 { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--light-line);
+  border-radius: 12px;
+  padding: 1.8rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.card .card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.card-grid .card-span-full {
+  grid-column: 1 / -1;
+}
+
+/* Black card (e.g. philosophy) */
+.card-dark {
+  background: #1a1a18;
+  border: none;
+  color: var(--paper);
+  padding: 4rem 3.5rem;
+}
+.card-dark .section-label { color: rgba(245, 240, 232, 0.7); }
+.card-dark h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.2;
+  font-weight: 400;
+  color: var(--paper);
+  margin-bottom: 1rem;
+}
+.card-dark h2 .philosophy-accent {
+  color: var(--accent2);
+}
+.card-dark h3,
+.card-dark p { color: rgba(245, 240, 232, 0.85); }
+.card-dark p { margin-bottom: 1rem; }
+.card-dark p:last-child { margin-bottom: 0; }
+
+/* Partners / Worked with */
+.partners-section {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+.partners-section .section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.partners-logos {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+.partners-logos .partner-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 48px;
+  flex-shrink: 0;
+}
+.partners-logos .partner-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.75;
+  transition: filter 0.2s, opacity 0.2s;
+}
+.partners-logos .partner-logo img:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* Proof gallery */
+.proof-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.proof-gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--light-line);
+}
+@media (max-width: 700px) {
+  .proof-gallery { grid-template-columns: 1fr; }
+  .proof-gallery img { height: 200px; }
+}
+
+/* CTA SECTION */
+.cta-section {
+  max-width: 1040px;
+  margin: 3rem auto;
+  padding: 6rem 3.5rem;
+  text-align: center;
+  position: relative;
+  background: #284032;
+  color: var(--paper);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(200,75,49,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(45,106,79,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(91,74,138,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cta-section h2,
+.cta-section p {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.cta-section .sub-heading {
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  color: rgba(245,240,232,0.95);
+}
+
+.cta-section .section-label {
+  color: rgba(245, 240, 232, 0.7);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section .btn-primary {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  background: var(--accent);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: #7d8c00;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--light-line);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* RESPONSIVE */
+@media (max-width: 500px) {
+  html { font-size: 15px; }
+  .hero { padding: calc(var(--nav-height) + 3rem) var(--mobile-gutter) 5rem; }
+  .section { padding: 3rem var(--mobile-gutter); }
+  .partners-section { padding: 3rem var(--mobile-gutter); }
+  .partners-logos { flex-wrap: wrap; gap: 1.5rem; }
+  .partners-logos .partner-logo { width: 100px; height: 36px; }
+  .cta-section { padding: 4rem var(--mobile-gutter); }
+  .nav { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(245,240,232,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-line);
+    padding: 1rem var(--mobile-gutter) 1.5rem;
+    gap: 0;
+  }
+  .nav.open .nav-links {
+    display: flex;
+  }
+  .nav.open .nav-links li {
+    border-bottom: 1px solid var(--light-line);
+  }
+  .nav.open .nav-links li:last-child { border-bottom: none; }
+  .nav.open .nav-links a {
+    display: block;
+    padding: 0.85rem 0;
+    font-size: 0.8rem;
+  }
+  .footer { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">Majoriti</a>
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="report.html">Read the Report</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1><span class="hero-accent">From 0 to 1</span><br>in a world moving from 1 to 1,000</h1>
+  <p class="hero-lead">
+    Majoriti is your partner in AI education. We design experiences that turn uncertainty into capability, one step at a time.
+  </p>
+  <p class="hero-sub">
+    The AI revolution isn't waiting. New tools launch daily, headlines shift hourly, and it can feel like everyone else already speaks the language. We're here to close that gap — not with hype, but with hands-on education that meets you exactly where you are.
+  </p>
+  <div class="hero-actions">
+    <a href="#cta" class="btn-primary">Get Started</a>
+    <a href="#proof" class="btn-secondary">See Our Work</a>
+  </div>
+</section>
+
+<main class="site-content">
+
+<!-- WHAT WE DO -->
+<section class="section">
+  <p class="section-label">What We Do</p>
+  <h2>Your AI education partner</h2>
+  <p>
+    Most AI education assumes you're already in the game. We don't. We start at zero — real zero — and build from there with practical, human-centered workshops that leave you with tools you'll actually use.
+  </p>
+  <p>
+    Whether you're a university preparing graduates for a shifting job market, a school looking to inspire the next generation, or a company ready to unlock your team's creative potential — we meet you where you are and walk alongside you.
+  </p>
+</section>
+
+<!-- WORKED WITH -->
+<section class="partners-section">
+  <p class="section-label">Worked with</p>
+  <div class="partners-logos" aria-label="Partner logos">
+    <div class="partner-logo"><img src="images/ai-education/partners/imperial.png" alt="Imperial College London"></div>
+    <div class="partner-logo"><img src="images/ai-education/partners/reichman.svg" alt="Reichman University"></div>
+    <div class="partner-logo"><img src="images/ai-education/partners/hanoar.webp" alt="Hanoar Hatzioni Haolami"></div>
+    <div class="partner-logo"><img src="images/ai-education/partners/fluxfutures.avif" alt="Fluxfutures"></div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="section" id="how-we-work">
+  <p class="section-label">How We Work</p>
+  <h2>Flexible formats, real results</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3>Kickstart</h3>
+      <p>One-time workshops designed to demystify AI and put real tools in your hands in a single session.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>Partnership</h3>
+      <p>Recurring programs and embedded collaborations that build lasting AI fluency across your organization.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">◇</div>
+      <h3>White Label</h3>
+      <p>We power your AI education offering, so you can bring cutting-edge workshops to your own audience.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PHILOSOPHY (black card) -->
+<section class="section">
+  <div class="card-grid">
+    <div class="card card-dark card-span-full">
+      <p class="section-label">Our Philosophy</p>
+      <h2>Let AI do what AI does. <span class="philosophy-accent">Let humans do what only humans can.</span></h2>
+      <p>
+        We believe the real opportunity isn't in racing to keep up — it's in knowing what to hand off and what to hold onto. Creativity, empathy, intuition, collaboration, purpose. These aren't things AI replaces. They're things AI can amplify — if you know how.
+      </p>
+      <p>
+        That's what we teach.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE WORK WITH -->
+<section class="section">
+  <p class="section-label">Who We Work With</p>
+  <h2>Built for the people who shape what's next</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card">
+      <div class="card-icon">🎓</div>
+      <h3>Universities</h3>
+      <p>Preparing graduates with the workflows and tools the professional world already expects.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📚</div>
+      <h3>Schools</h3>
+      <p>Sparking curiosity in students and confidence in teachers with the latest AI tools.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏢</div>
+      <h3>Companies</h3>
+      <p>Designing creative AI workflows that help teams execute better and innovate faster.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌍</div>
+      <h3>Delegations</h3>
+      <p>Giving international visitors a hands-on window into Israel's vibrant AI scene.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="section" id="proof">
+  <p class="section-label">Proof</p>
+  <h2>Hundreds of people. Zero left behind.</h2>
+  <p>
+    We've partnered with Imperial College London, Reichman University, Hanoar Hatzioni Haolami, and Fluxfutures — training hundreds of students and professionals, each one starting from wherever they were and leaving with something real.
+  </p>
+  <div class="proof-gallery" aria-label="Proof gallery">
+    <img src="images/ai-education/imperial.png" alt="Imperial College London workshop">
+    <img src="images/ai-education/reichman.png" alt="Reichman University session">
+    <img src="images/ai-education/hanoar.png" alt="Hanoar Hatzioni Haolami program">
+  </div>
+  <p>
+    From 100 high school graduates building products in 90-minute sessions, to academic collaborations with London design studios, to speculative design cohorts — every project starts at zero and ends with momentum.
+  </p>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <h2>Ready to go from 0 to 1?</h2>
+  <p>
+    The world won't slow down. But you don't have to figure it out alone. Let's build your AI fluency together.
+  </p>
+  <a href="mailto:hello@majoriti.world" class="btn-primary">Let's Talk</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Majoriti World Ltd. • Tel Aviv • Building infrastructure for collective work.</p>
+</footer>
+</main>
+
+<script>
+(function() {
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('nav-toggle');
+  if (nav && navToggle) {
+    navToggle.addEventListener('click', function() {
+      nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', nav.classList.contains('open'));
+      navToggle.setAttribute('aria-label', nav.classList.contains('open') ? 'Close menu' : 'Open menu');
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

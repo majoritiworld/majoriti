@@ -21,6 +21,8 @@
   --cluster4: #5b4a8a;
   --cluster5: #2e6b8a;
   --cluster6: #8b4e6a;
+  --mobile-gutter: 1.5rem; /* 24px – standard content margin for mobile */
+  --nav-height: 3.25rem;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,6 +30,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 17px;
+  scroll-padding-top: var(--nav-height);
 }
 
 body {
@@ -36,6 +39,8 @@ body {
   background: var(--paper);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  padding-left: max(var(--mobile-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--mobile-gutter), env(safe-area-inset-right));
 }
 
 ::selection {
@@ -91,6 +96,22 @@ body {
 }
 
 .nav-links a:hover { color: var(--ink); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--ink);
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 
 /* HERO */
 .hero {
@@ -498,10 +519,6 @@ p.lead {
   margin: 2rem 0;
 }
 
-@media (max-width: 700px) {
-  .glance-grid { grid-template-columns: 1fr; }
-}
-
 .glance-stat {
   text-align: center;
   padding: 1.5rem;
@@ -527,9 +544,9 @@ p.lead {
 
 /* CLOSING */
 .closing {
-  text-align: center;
+  text-align: left;
   padding: 6rem 2rem;
-  max-width: 700px;
+  max-width: 820px;
   margin: 0 auto;
 }
 
@@ -539,7 +556,7 @@ p.lead {
 
 .takeaway-list {
   text-align: left;
-  max-width: 580px;
+  max-width: 820px;
   margin: 0 auto 2.5rem;
 }
 
@@ -639,6 +656,62 @@ p.lead {
   margin: 0;
 }
 
+/* CONTINUE HERE CARD */
+.continue-here-wrap {
+  max-width: 820px;
+  margin: 1.25rem auto 0;
+  padding: 0 2rem;
+}
+
+.continue-here-card .card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.continue-here-card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--light-line);
+  border-radius: 12px;
+  padding: 1.5rem 1.8rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.continue-here-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  color: var(--ink);
+}
+
+.continue-here-card .continue-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.continue-here-card .continue-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+
+.continue-here-card .continue-abstract {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
 /* BILINGUAL QUOTE INDICATOR */
 .lang-tag {
   font-family: 'JetBrains Mono', monospace;
@@ -652,7 +725,7 @@ p.lead {
 }
 
 /* VIEW PANES */
-#report-views { position: relative; }
+#report-views { position: relative; padding-top: var(--nav-height); }
 .view-pane {
   display: none;
   min-height: 100vh;
@@ -728,14 +801,45 @@ p.lead {
   margin-bottom: 1.5rem;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE – mobile gutter follows best practice (24px / 1.5rem) */
 @media (max-width: 500px) {
   html { font-size: 15px; }
-  .hero { padding: 3rem 1.5rem; }
-  .section, .cluster { padding: 3rem 1.5rem; }
-  .nav-links { display: none; }
+  .hero { padding: 3rem var(--mobile-gutter); }
+  .section, .cluster { padding: 3rem var(--mobile-gutter); }
+  .nav { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(245,240,232,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-line);
+    padding: 1rem var(--mobile-gutter) 1.5rem;
+    gap: 0;
+  }
+  .nav.open .nav-links {
+    display: flex;
+  }
+  .nav.open .nav-links li {
+    border-bottom: 1px solid var(--light-line);
+  }
+  .nav.open .nav-links li:last-child { border-bottom: none; }
+  .nav.open .nav-links a {
+    display: block;
+    padding: 0.85rem 0;
+    font-size: 0.8rem;
+  }
   .hero-meta { flex-direction: column; align-items: center; gap: 0.8rem; }
-  .home-section-cards { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+  .home-section-cards { grid-template-columns: 1fr; padding: 2rem var(--mobile-gutter) 5rem; }
+  .glance-stat .number { font-size: 1.75rem; }
+  .home-section-card .card-icon { font-size: 1.1rem; }
+  .section-nav { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
+  .footer { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
+  .closing { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
 }
 </style>
 </head>
@@ -743,7 +847,10 @@ p.lead {
 
 <!-- NAVIGATION -->
 <nav class="nav nav-always-visible" id="nav">
-  <a href="#home" class="nav-logo">The Community Paradox</a>
+  <a href="#home" class="nav-logo">Majoriti</a>
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#context">Context</a></li>
@@ -833,19 +940,19 @@ p.lead {
         <p>
           This report maps the landscape, names the pain, and asks the questions that emerged from those conversations.
         </p>
-        <div class="toc">
-          <a href="#landscape">🗺 Landscape</a>
-          <a href="#leaders">👤 Leader Types</a>
-          <a href="#findings">🔬 Findings</a>
-          <a href="#c1">🧩 Leadership</a>
-          <a href="#c2">🌱 Emergence</a>
-          <a href="#c3">🚧 Missed Potential</a>
-          <a href="#c4">📢 Communication</a>
-          <a href="#c5">🧭 Identity</a>
-          <a href="#c6">🔁 Participation</a>
-          <a href="#closing">✦ Takeaways</a>
+        <div class="pattern-box" style="max-width:820px;margin:2rem auto;">
+          <div class="pattern-label">About Majoriti</div>
+          <p>Majoriti is an R&D Lab based in Tel Aviv, researching and building infrastructure for collective work. We believe communities are the antidote to burnout and polarization — but for them to become a relevant force in society, we must take them seriously.</p>
         </div>
       </section>
+      <div class="continue-here-wrap">
+        <a href="#landscape" class="continue-here-card fade-in">
+          <div class="card-icon">🗺</div>
+          <p class="continue-label">Continue here</p>
+          <p class="continue-title">01 — The Landscape</p>
+          <p class="continue-abstract">A taxonomy of communities: how purpose and structure shape the four types we found.</p>
+        </a>
+      </div>
       <nav class="section-nav" aria-label="Report sections">
         <p class="section-nav-label">Explore other sections</p>
         <div class="toc">
@@ -877,35 +984,48 @@ p.lead {
       <div class="card-icon">🔥</div>
       <h4>Mission-Driven</h4>
       <p>Built around a cause, a belief system, or a desire to change something in the world. The community exists <em>because</em> of the mission — and often dies without it.</p>
-      <div class="examples">Robin Food · Bet-El · KY Kabbalah · Lazos</div>
+      <div class="examples">Food rescue · Spiritual community · Social enterprise · Diaspora (mission dimension)</div>
     </div>
     <div class="taxonomy-card">
       <div class="card-icon">🔬</div>
       <h4>Knowledge-Driven</h4>
       <p>Built around shared curiosity, learning, or expertise. Members come to know — and stay because knowing together is better than knowing alone.</p>
-      <div class="examples">Slime Mold · HCI · Weizmann · Meaning of Life · Compliance LATAM</div>
+      <div class="examples">Citizen science · Scientific institute · Professional network · Philosophy circle</div>
     </div>
     <div class="taxonomy-card">
       <div class="card-icon">⚡</div>
       <h4>Experience-Driven</h4>
       <p>Built around a shared activity — the doing <em>is</em> the bonding. The community is what happens in the spaces between reps, runs, and rounds.</p>
-      <div class="examples">Sweat Club · Weavy (product community)</div>
+      <div class="examples">Wellness community · Startup (product community)</div>
     </div>
     <div class="taxonomy-card">
       <div class="card-icon">🪞</div>
       <h4>Identity-Driven</h4>
       <p>Built around belonging to a group — alumni, diaspora, a shared background. You don't join for what they do, but for who you are when you're there.</p>
-      <div class="examples">NAA · Lazos (diaspora dimension)</div>
+      <div class="examples">Alumni network · Diaspora community</div>
     </div>
   </div>
 
   <div style="max-width:820px;margin:0 auto;">
     <div class="pattern-box">
       <div class="pattern-label">🔍 Pattern we noticed</div>
-      <p>Most communities are hybrids. Lazos is both mission-driven and identity-driven. Slime Mold started as knowledge-driven but became deeply experience-driven through in-person field tours. The healthiest communities seem to operate in <strong>at least two quadrants</strong> — giving members multiple reasons to stay.</p>
+      <p>Most communities are hybrids. Some sit in both mission-driven and identity-driven quadrants. A knowledge-driven community can become deeply experience-driven through in-person activities. The healthiest communities seem to operate in <strong>at least two quadrants</strong> — giving members multiple reasons to stay.</p>
     </div>
   </div>
+
+  <div style="max-width:820px;margin:2.5rem auto 0;">
+    <h3 style="font-family:'Instrument Serif',serif;font-size:1.5rem;font-weight:400;margin-bottom:1rem;">The Spectrum of Belonging</h3>
+    <p>What brings people into a community varies deeply. At one extreme are <strong>grassroots communities</strong> — 100% built on choice. People come together around a shared interest; belonging is active and chosen. At the other extreme are communities you join almost <strong>by osmosis</strong> — like alumni networks, where graduating hands you a membership you didn't have to seek. In between sit communities rooted in <strong>shared identity</strong>: for example, being part of a minority group. You may not feel you "belong" anywhere in particular, but that identity creates a bridge — you recognise yourself in others, and a community that speaks to that experience can quickly feel like yours. This spectrum — from chosen belonging to given belonging, with identity as a middle ground — shapes how people show up and what they expect from the community.</p>
+  </div>
 </section>
+      <div class="continue-here-wrap">
+        <a href="#leaders" class="continue-here-card fade-in">
+          <div class="card-icon">👤</div>
+          <p class="continue-label">Continue here</p>
+          <p class="continue-title">02 — Leader Types</p>
+          <p class="continue-abstract">Four kinds of community leaders: accidental founders, stewards, mission carriers, and connectors.</p>
+        </a>
+      </div>
       <nav class="section-nav" aria-label="Report sections">
         <p class="section-nav-label">Explore other sections</p>
         <div class="toc">
@@ -965,6 +1085,14 @@ p.lead {
     </div>
   </div>
 </section>
+      <div class="continue-here-wrap">
+        <a href="#findings" class="continue-here-card fade-in">
+          <div class="card-icon">🔬</div>
+          <p class="continue-label">Continue here</p>
+          <p class="continue-title">03 — The 6 Pain Clusters</p>
+          <p class="continue-abstract">What keeps leaders up at night: six structural tensions in their own words.</p>
+        </a>
+      </div>
       <nav class="section-nav" aria-label="Report sections">
         <p class="section-nav-label">Explore other sections</p>
         <div class="toc">
@@ -996,33 +1124,33 @@ p.lead {
     <div class="cluster-emoji">🧩</div>
     <div>
       <span class="cluster-tag" style="background:var(--cluster1);">Cluster 1</span>
-      <h2>Everyone wants to lead until it's time to lead</h2>
-      <p class="cluster-subtitle">On leadership transitions, burnout, and the fragility of one-person dependencies</p>
+      <h2>You want to burn out? Become a community leader.</h2>
+      <p class="cluster-subtitle">On leadership dependency, burnout, and the fragility of one-person operations</p>
     </div>
   </div>
 
-  <p>The most universal pain: communities are built on the shoulders of one or two individuals, and that model is inherently fragile. When the leader burns out, moves away, or tries to hand off — things break.</p>
+  <p>Almost every leader we spoke to described the same problem: the community runs on them. Because communities tend to be less structured than companies, they heavily depend on leaders to do most of the work — and leaders end up carrying far more than is sustainable.</p>
 
   <div class="quote-block accent-1">
-    <p>"She came to this place thinking 'it's a mess, I'll take it from here, I'll clean it up.' Famous last words."</p>
-    <div class="attribution">— Leader, Robin Food (on a failed leadership transition)</div>
+    <p>"I would sit and have like an hour long chat with every new volunteer, tell them the story of Robin food, get to know their story, plug them into the system, coordinate expectations and find a way for them to fit in... I wore very many hats."</p>
+    <div class="attribution">— Founder, mission-driven social enterprise</div>
   </div>
 
-  <p>One leader described building an entire fundraising operation and training a team for a year before stepping back — only to watch the successor disregard the institutional knowledge and drive the organization to closure in six months.</p>
+  <p>One leader described doing food rescues at 6:00 AM before events, managing volunteers, running a restaurant, and handling everything in between. Another spoke about the "crazy overload" of trying to personally respond to every community member while keeping the community feel personal.</p>
 
   <div class="quote-block accent-1">
-    <span class="lang-tag">Original — Spanish</span>
-    <p>"Todavía no me siento completamente un líder en ese sentido... le tengo miedo a la soberbia, a creerse el maestro espiritual y el iluminado."</p>
-    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">I don't fully feel like a leader yet... I'm afraid of arrogance, of becoming the self-proclaimed spiritual master.</p>
-    <div class="attribution">— Leader, KY Kabbalah</div>
+    <p>"Overload, crazy overload, crazy overload. As the volume goes up, it's very hard to keep it personal. In the beginning we were there all the time. Now I get there like once in 2-3 days. It's not enough... We are loaded with work."</p>
+    <div class="attribution">— Founder, product-led creator community</div>
   </div>
+
+  <p>This isn't just exhaustion. It's structural fragility. When one person holds all the knowledge, all the relationships, all the context — the community becomes inseparable from that person's energy.</p>
 
   <div class="pattern-box">
     <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>The leaders who were <em>most</em> afraid of being irreplaceable were often the most irreplaceable. Humility about the leadership role paradoxically made succession harder — because they never formalized what they brought to the community that wasn't just "content."</p>
+    <p>Leadership burnout in communities isn't a personal failure — it's a <strong>structural inevitability</strong> when one person carries everything. Without clear role distribution, documentation, or systems to distribute responsibility, leaders find themselves "treading water" just to keep things alive. The more successful the community, the heavier the burden becomes.</p>
   </div>
 
-  <div class="provocation">If the community dies when the leader leaves — was it ever really a community, or was it a following?</div>
+  <div class="provocation">If the community collapses the moment you step away, you haven't built a community — you've built a dependency.</div>
 </div>
 
 <hr class="section-divider">
@@ -1033,33 +1161,37 @@ p.lead {
     <div class="cluster-emoji">🌱</div>
     <div>
       <span class="cluster-tag" style="background:var(--cluster2);">Cluster 2</span>
-      <h2>Nobody planned this — and that's the magic</h2>
-      <p class="cluster-subtitle">On emergent leadership, organic growth, and the beauty of accidental communities</p>
+      <h2>Some members want to do more — but there's nowhere for them to go</h2>
+      <p class="cluster-subtitle">On emergent leadership, informal core groups, and the invisible hierarchy of engagement</p>
     </div>
   </div>
 
-  <p>Almost every leader told us the same thing: they didn't set out to build a community. It happened. A Facebook group for sharing slime mold photos. A cooking project that attracted volunteers. A student club that became something bigger than the curriculum.</p>
+  <p>In almost every community we studied, a small group of members naturally stepped up. They wanted to contribute, lead workshops, take on projects. This is the beautiful reality of communities — people <em>want</em> to help.</p>
 
   <div class="quote-block accent-2">
-    <p>"I didn't think that I was building a community when I started. It just started as an online group for sharing knowledge."</p>
-    <div class="attribution">— Leader, Slime Mold Community</div>
+    <p>"Right now I have about three students who take initiative. One of them is at this point a co-leader... That's what I want to see for everyone. I want it to be a communal creation."</p>
+    <div class="attribution">— Founder, philosophy-driven student community</div>
   </div>
 
-  <p>What's remarkable is how leaders described the moment of recognition — the point where they realized they had something alive on their hands. For one, it was a field tour where eight strangers shared an electric moment of curiosity. For another, it was watching repeat faces at what were supposed to be one-off events.</p>
+  <p>Another described how their small core group of active members emerged entirely organically — people talking to each other without the founders, creating connections on their own. Members would come up and say they knew something and would like to lead a workshop.</p>
+
+  <p>But most communities didn't have a way to recognize, formalize, or support this energy.</p>
 
   <div class="quote-block accent-2">
-    <p>"Community was always a means for an end for me. I wanted things that I thought should exist, to exist. And one of the main ways to make that happen was to get people excited and working together."</p>
-    <div class="attribution">— Leader, Robin Food</div>
+    <span class="lang-tag">Original — Spanish</span>
+    <p>"Lo que más me cuesta a mí es intentar armar una estructura... Tener que armar una mesa con voluntarios. Pero a la vez todavía no conozco tanto a los miembros como para decir, bueno, vení y lo hagamos juntos."</p>
+    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">What's hardest for me is trying to build a structure... Having to build a team with volunteers. But I still don't know the members well enough to say, come, let's do this together.</p>
+    <div class="attribution">— Leader, identity-based Latin American community</div>
   </div>
 
-  <p>The emergent quality extends to leadership within communities too. One leader described a co-leader who, over the course of three meetings, went from participant to organizer to preparing material independently — completely unprompted.</p>
+  <p>One leader had a term for these people: "bangers" — but none of the bangers knew they were bangers. The roles existed in practice but not in name or structure.</p>
 
   <div class="pattern-box">
     <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>The communities that grew most organically were the ones where the leader's <strong>enthusiasm was contagious, not their authority</strong>. People didn't join because they were told to — they joined because they felt something was happening and didn't want to miss it.</p>
+    <p>Emergent leadership is happening everywhere — but it's <strong>invisible, informal, and fragile</strong>. The most engaged members don't have a pathway from "participant" to "contributor" to "co-leader." Without tooling or visibility, this energy either burns out or gets absorbed by the founder, who becomes the bottleneck once again.</p>
   </div>
 
-  <div class="provocation">Can you design emergence — or only design the conditions for it?</div>
+  <div class="provocation">If you're manually activating every single leader in your community, you don't have a system — you have a heroic effort that can't scale.</div>
 </div>
 
 <hr class="section-divider">
@@ -1070,35 +1202,35 @@ p.lead {
     <div class="cluster-emoji">🚧</div>
     <div>
       <span class="cluster-tag" style="background:var(--cluster3);">Cluster 3</span>
-      <h2>We know it could be more — but we can't get there</h2>
-      <p class="cluster-subtitle">On missed potential, limited resources, and the gap between vision and capacity</p>
+      <h2>We know what we could do — we just can't do it</h2>
+      <p class="cluster-subtitle">On missed potential, stalled projects, and the gap between vision and capacity</p>
     </div>
   </div>
 
-  <p>Every leader we spoke to — without exception — described a gap between what their community <em>could</em> be and what it actually is. Not out of dissatisfaction, but out of a kind of aching awareness that the potential is enormous and the resources are not.</p>
+  <p>Leaders described ambitious projects that never got off the ground. A scientific community wanted to publish a book documenting their research — members were enthusiastic, the content was there, but the project stalled and never succeeded.</p>
+
+  <div class="quote-block accent-3">
+    <p>"We talk about doing it for years, but it never happens."</p>
+    <div class="attribution">— Leader, knowledge-driven citizen science community</div>
+  </div>
+
+  <p>The bottleneck wasn't desire. It wasn't even funding in most cases. It was <em>time, coordination, and bandwidth</em>.</p>
 
   <div class="quote-block accent-3">
     <span class="lang-tag">Original — Spanish</span>
-    <p>"Las posibilidades son infinitas y uno nunca alcanza a hacer lo que se podría hacer."</p>
-    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">The possibilities are infinite, and you never manage to do everything that could be done.</p>
-    <div class="attribution">— Leader, Weizmann Institute (Latin America)</div>
+    <p>"Lo que queremos para el 2026 es no ser eventos aislados, sino generar programas."</p>
+    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">What we want for 2026 is to stop being isolated events and start creating programs.</p>
+    <div class="attribution">— Leader, identity-based Latin American community</div>
   </div>
 
-  <p>For grassroots communities, the bottleneck is almost always time. Leaders are doing this alongside full-time jobs, studies, or parenting. For institutional communities, the bottleneck is often people — finding professionals and volunteers of the right caliber.</p>
-
-  <div class="quote-block accent-3">
-    <span class="lang-tag">Original — Spanish</span>
-    <p>"Es muy difícil seguir haciendo crecer la plataforma cuando tenéis muchas horas de tu día metidas en actualizar cosas de la página web... cambiar el logo, subir algo, actualizar bases de datos."</p>
-    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">It's very hard to keep growing the platform when so many hours are lost updating the website, changing logos, uploading things, updating databases.</p>
-    <div class="attribution">— Leader, Compliance LATAM</div>
-  </div>
+  <p>This leader articulated what many felt: the desire to move from one-off events to sustained programs, from transactional moments to relational depth. But without the infrastructure to make that leap, communities stay stuck in reactive mode — responding to immediate needs rather than building toward a vision.</p>
 
   <div class="pattern-box">
     <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>The operational work <strong>always expands to eat the strategic work</strong>. Leaders who should be thinking about the future of their communities are instead updating spreadsheets, chasing people on WhatsApp, and fixing website logos. There's a massive infrastructure gap — communities are using tools designed for businesses or friend groups, and neither fits.</p>
+    <p>The most value-creating work in communities — <strong>relationship maintenance, emotional labor, one-on-one outreach</strong> — is invisible, unrecognized, and unscalable. Yet it's essential for survival. Communities want to move from events to programs, from transactional to relational, but they don't have the infrastructure to make that leap.</p>
   </div>
 
-  <div class="provocation">What if the thing communities need most isn't better tools, but fewer tasks?</div>
+  <div class="provocation">Ambition without infrastructure isn't vision — it's burnout waiting to happen.</div>
 </div>
 
 <hr class="section-divider">
@@ -1109,30 +1241,30 @@ p.lead {
     <div class="cluster-emoji">📢</div>
     <div>
       <span class="cluster-tag" style="background:var(--cluster4);">Cluster 4</span>
-      <h2>WhatsApp wasn't built for this — but here we are</h2>
-      <p class="cluster-subtitle">On communication channels, the platform problem, and reaching people where they are</p>
+      <h2>WhatsApp is king</h2>
+      <p class="cluster-subtitle">On the default communication stack, fragmented channels, and tools built for something else</p>
     </div>
   </div>
 
-  <p>Every single community we interviewed relies on WhatsApp as their primary coordination tool. Every. Single. One. They also all know it's not ideal. They tried Slack (nobody engaged), email (nobody read), and custom platforms (too much friction). So WhatsApp wins by default.</p>
+  <p>With one exception (a startup community using Discord), every single community we studied relied heavily on WhatsApp as their primary coordination tool.</p>
 
   <div class="quote-block accent-4">
-    <p>"We tried Slack and it was hard. Nobody was engaged on the platform. Even emails — not an option. So we said, OK, let's open a WhatsApp group."</p>
-    <div class="attribution">— Leader, HCI Community</div>
+    <p>"We tried Slack… nobody was engaged… email is not an option… so we opened a WhatsApp group."</p>
+    <div class="attribution">— Leader, institution-anchored professional community</div>
   </div>
 
-  <p>Some leaders have gotten creative. One fitness community created a small "Active Members" WhatsApp group of 30 repeat attendees — a VIP tier within the community. One rabbi shares his personal WhatsApp with the entire congregation. A tech product community built a 20,000-member Discord as a complement.</p>
+  <p>Why? Not because WhatsApp is great for community management. Because it's universal, it's simple, and nothing better exists that people actually use.</p>
 
   <div class="quote-block accent-4">
-    <span class="lang-tag">Original — Spanish</span>
-    <p>"El WhatsApp es como la herramienta principal de cercanía con la gente. Para mí lo tiene en directo."</p>
-    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">WhatsApp is the main tool for closeness with people. For me, it's direct access.</p>
-    <div class="attribution">— Leader, Bet-El Community</div>
+    <p>"The infrastructure was very basic. It's just WhatsApp for coordination, Google Sheets for timetables and the CRM and everything. Sure, maybe we could have developed some custom tool, but the more custom it is, the more friction in getting it in people's hands."</p>
+    <div class="attribution">— Founder, mission-driven social enterprise</div>
   </div>
+
+  <p>Communities need low friction — but what are the costs of using tools that weren't built for them? WhatsApp doesn't hold memory. It doesn't track roles or progression. It can't distinguish between a lurker and a core contributor. It's a communication tool being forced to be a community tool.</p>
 
   <div class="pattern-box">
     <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>The communication problem is really <strong>two problems</strong>. First: how to <em>reach</em> people (broadcast). Second: how to make people <em>feel reached</em> (connection). WhatsApp is excellent at the second and mediocre at the first. No leader has found a tool that does both well. The ones who come closest use WhatsApp for intimacy and Instagram or Facebook for broadcast — but that means managing multiple channels with no integration.</p>
+    <p>The tool you use to talk to your community <strong>shapes the kind of community you can build</strong>. Broadcast-only channels create dependency on the founder. One-on-one nudging creates bottlenecks. WhatsApp groups create noise but not structure. Leaders want dialogue, not just announcements — but the tools they have make dialogue nearly impossible at scale.</p>
   </div>
 
   <div class="provocation">The tool you use to talk to your community shapes the kind of community you can build.</div>
@@ -1157,19 +1289,23 @@ p.lead {
     <span class="lang-tag">Original — Spanish</span>
     <p>"Yo creo que hoy en día los miembros no se sienten parte de una comunidad aún, sino que dirían que me aporta herramientas o espacios, pero así como más aislados."</p>
     <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">I think today the members don't feel like they're part of a community yet — they'd say it gives them tools or spaces, but in a more isolated way.</p>
-    <div class="attribution">— Leader, Lazos</div>
+    <div class="attribution">— Leader, identity-based Latin American community</div>
   </div>
 
-  <p>One leader described struggling to explain why their local chapter matters when they themselves don't fully connect with the international parent organization. Another described the difficulty of naming what they do at all — is it a class? A circle? A club? A movement?</p>
+  <p>There's a disconnect between what leaders envision and what members experience. Leaders see a community; members see useful events. Leaders have a story in their heads; members don't know they're part of one.</p>
+
+  <p>This disconnect becomes even more problematic when trying to bring new people into leadership positions. The community's DNA — its culture, values, and way of doing things — lives entirely in the founder's head.</p>
 
   <div class="quote-block accent-5">
-    <p>"People have a hunger for community even if they can't quite articulate it."</p>
-    <div class="attribution">— Leader, Robin Food</div>
+    <p>"It's not just transferring a role — it's transferring the soul, a vibe, a way of doing things and of course, established relationships with large amounts of people."</p>
+    <div class="attribution">— Founder, mission-driven social enterprise</div>
   </div>
+
+  <p>When everything that defines the community is tacit knowledge, onboarding becomes nearly impossible. How do you hand over something you can't articulate?</p>
 
   <div class="pattern-box">
     <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>The communities with the strongest identities were those with <strong>a clear aesthetic, language, or ritual</strong> — not just a clear mission. Robin Food had puns and a playful visual style. Sweat Club had "challenges" as a branded concept. The Slime Mold community had the organism itself as a metaphor for how they organize. Identity isn't just a mission statement. It's how a community <em>feels</em> from the inside.</p>
+    <p>The communities with the strongest identities were those with <strong>a clear aesthetic, language, or ritual</strong> — not just a clear mission. A social enterprise had puns and a playful visual style. A wellness community had "challenges" as a branded concept. A citizen science group had the organism itself as a metaphor for how they organize. Identity isn't just a mission statement. It's how a community <em>feels</em> from the inside.</p>
   </div>
 
   <div class="provocation">If your members can't explain your community in one sentence to a friend, you don't have a story yet.</div>
@@ -1192,27 +1328,37 @@ p.lead {
 
   <div class="quote-block accent-6">
     <span class="lang-tag">Original — Spanish</span>
-    <p>"No ser eventos aislados, sino generar una especie de programas... que sean las mismas mujeres o más o menos las mismas las que vienen a distintos encuentros para que se conozcan entre ellas."</p>
-    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">Not isolated events, but programs — the same women coming to different meetups so they get to know each other.</p>
-    <div class="attribution">— Leader, Lazos</div>
+    <p>"Si no hacía la convocatoria uno a uno, había cero participantes inscriptos."</p>
+    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">If I didn't do outreach one-on-one, there were zero people signed up.</p>
+    <div class="attribution">— Leader, identity-based Latin American community</div>
   </div>
+
+  <p>The manual labor of activating people — sending individual messages, personal reminders, one-on-one nudges — becomes the only way to get anyone to show up. But this doesn't scale, and it's exhausting.</p>
 
   <p>Several leaders pointed to the tension between in-person depth and asynchronous breadth. In-person events create magic but exclude people who can't attend. Online channels create access but rarely depth. The best communities need both — but building both is twice the work.</p>
 
   <div class="quote-block accent-6">
-    <p>"It's not bad to have disengaged people — at some point they can become engaged. Even if they're lurking from the outside, they are giving energy to this movement."</p>
-    <div class="attribution">— Researcher observation during interviews</div>
+    <p>"How do we help people understand that their absence is noticed and their showing up is appreciated?"</p>
+    <div class="attribution">— Founder, philosophy-driven student community</div>
   </div>
 
   <p>One community tracks attendance in a spreadsheet and graduates repeat attendees into a VIP WhatsApp group. Another set fixed meeting times and accepted they'd lose some interested people — because trying to accommodate everyone meant accommodating no one.</p>
 
   <div class="pattern-box">
     <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>The leaders who stressed least about participation were the ones who embraced the <strong>commitment curve</strong> — accepting that for every active leader, you need an audience of passive members, and that this is <em>natural</em>, not a failure. The shift from "why isn't everyone participating equally?" to "how do I design multiple levels of engagement?" was the single most liberating reframe in our research.</p>
+    <p>When the community's value proposition isn't clear — when members don't understand what they're getting or why they should keep coming back — leaders resort to <strong>manual activation instead of organic pull</strong>. This is a community-market-fit problem. Without a clear, consistent utility that members can articulate, recurring participation becomes dependent on the leader's hustle rather than the community's inherent value.</p>
   </div>
 
-  <div class="provocation">What if lurkers aren't a problem to solve — but the foundation that makes active participation possible?</div>
+  <div class="provocation">If you can't articulate what's the value of your community, can you expect members to do so?</div>
 </div>
+      <div class="continue-here-wrap">
+        <a href="#closing" class="continue-here-card fade-in">
+          <div class="card-icon">✦</div>
+          <p class="continue-label">Continue here</p>
+          <p class="continue-title">04 — Takeaways</p>
+          <p class="continue-abstract">Five things we'll remember from this research.</p>
+        </a>
+      </div>
       <nav class="section-nav" aria-label="Report sections">
         <p class="section-nav-label">Explore other sections</p>
         <div class="toc">
@@ -1237,30 +1383,38 @@ p.lead {
   <div class="takeaway-list">
     <div class="takeaway-item">
       <div class="takeaway-number">1</div>
-      <p><strong>Communities are accidents that need infrastructure.</strong> Every community we studied emerged organically — then hit a wall when it needed structure. The challenge isn't starting communities. It's keeping them alive past the founder's energy.</p>
+      <p><strong>Most communities emerge organically — then hit a wall when they need structure.</strong> Many communities in our research didn't start with an intentional "community plan." They emerged around a shared need or passion. The challenge isn't starting communities. It's keeping them alive past the founder's energy.</p>
     </div>
     <div class="takeaway-item">
       <div class="takeaway-number">2</div>
-      <p><strong>The tools don't exist yet.</strong> Communities are using business tools (Trello, Google Sheets) and social tools (WhatsApp, Instagram) because community tools haven't been invented. This is a design opportunity the size of an entire industry.</p>
+      <p><strong>Community leaders are intuitively choosing tools that aren't designed for their needs.</strong> The proof is in the pudding: when communities grow or when leaders need to step away, the limitations become painfully clear. While dedicated community tools exist, they haven't achieved widespread adoption. There's a reason WhatsApp is king — it doesn't work the best, but it works good enough to keep communities alive.</p>
     </div>
     <div class="takeaway-item">
       <div class="takeaway-number">3</div>
-      <p><strong>Leaders overestimate how much others want to lead.</strong> Expecting equal participation is "naive and anti-natural." The healthiest communities design a spectrum of engagement — from lurker to co-leader — and make every level feel valued.</p>
+      <p><strong>Leaders overestimate how much others want to lead.</strong> Expecting equal participation from all members is naive and anti-natural. The healthiest communities design a spectrum of engagement — from passive members to co-leaders — and make every level feel valued.</p>
     </div>
     <div class="takeaway-item">
       <div class="takeaway-number">4</div>
-      <p><strong>Identity is felt, not written.</strong> The communities with the strongest belonging weren't the ones with the best mission statement. They were the ones with the most distinctive <em>vibe</em> — a language, a ritual, an aesthetic that members could carry with them.</p>
+      <p><strong>Communities struggle when their value isn't clear.</strong> When members can't articulate why they come back — when the utility of the community isn't obvious — recurring participation becomes dependent on the leader's manual effort rather than organic pull. This is a community-market-fit problem: if the leader can't clearly explain what their community offers, members won't be able to either.</p>
     </div>
     <div class="takeaway-item">
       <div class="takeaway-number">5</div>
-      <p><strong>A community's value exists even for those who never show up.</strong> The mere knowledge that a community exists — that there <em>are</em> people who care about the same things — has value. Building for the lurkers isn't a consolation prize. It's building for the majority.</p>
+      <p><strong>A community's value exists even for those who never show up.</strong> It's natural that only a small percentage of members will engage actively. But passive members are still members, and they can become active at any point. The mere knowledge that a community exists — that there <em>are</em> people who care about the same things — has value. Building for the lurkers isn't a consolation prize. They are actually the foundation of most strong communities.</p>
     </div>
   </div>
 
-  <p style="color:var(--muted);font-size:0.95rem;max-width:480px;margin:0 auto;">
+  <p style="color:var(--muted);font-size:0.95rem;max-width:820px;margin:0;text-align:left;">
     This is a living document. The research continues with member interviews and a deeper analysis of community structures. If you're a leader who sees yourself in these pages — we'd love to hear from you.
   </p>
 </section>
+      <div class="continue-here-wrap">
+        <a href="#newsletter" class="continue-here-card fade-in">
+          <div class="card-icon">✉️</div>
+          <p class="continue-label">Stay in the loop</p>
+          <p class="continue-title">Subscribe to our newsletter</p>
+          <p class="continue-abstract">Receive more insights and tools for community building.</p>
+        </a>
+      </div>
       <nav class="section-nav" aria-label="Report sections">
         <p class="section-nav-label">Explore other sections</p>
         <div class="toc">
@@ -1278,8 +1432,12 @@ p.lead {
 
 <!-- FOOTER -->
 <footer class="footer">
-  <p>The Community Paradox — Insight Report © 2026 MAJORITI</p>
-  <p style="margin-top:0.5rem;">12 conversations. 6 clusters. 1 conviction: communities are the future.</p>
+  <p>The Community Paradox Insight Report © 2026 MAJORITI</p>
+  <div class="footer-links" style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:1rem;font-size:0.85rem;justify-content:center;">
+    <a href="https://www.instagram.com/majoriti.world/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://www.linkedin.com/company/majoritiworld/?viewAsMember=true" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" target="_blank" rel="noopener noreferrer">WhatsApp Community</a>
+  </div>
 </footer>
 
 <script>
@@ -1339,8 +1497,22 @@ p.lead {
         e.preventDefault();
         window.location.hash = id;
       }
+      document.getElementById('nav').classList.remove('open');
+      const toggle = document.getElementById('nav-toggle');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // Hamburger menu toggle (mobile)
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('nav-toggle');
+  if (nav && navToggle) {
+    navToggle.addEventListener('click', function() {
+      nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', nav.classList.contains('open'));
+      navToggle.setAttribute('aria-label', nav.classList.contains('open') ? 'Close menu' : 'Open menu');
+    });
+  }
 })();
 
 // Intersection Observer for fade-in (elements in visible pane)

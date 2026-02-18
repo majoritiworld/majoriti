@@ -9,6 +9,7 @@ export default defineConfig({
       input: {
         main: 'index.html',
         report: 'report.html',
+        'ai-education': 'ai-education.html',
       },
     },
   },

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Majoriti — R&D Lab for Collective Work</title>
+<title>Majoriti AI — Human-Centered AI Education</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 @font-face {
@@ -121,7 +121,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 2rem 7rem;
+  padding: calc(var(--nav-height) + 6rem) 2rem 7rem;
   position: relative;
   overflow: visible;
   background: #284032;
@@ -157,7 +157,7 @@ body {
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--paper);
-  max-width: 740px;
+  max-width: 850px;
   margin-top: 2rem;
   line-height: 1.6;
   position: relative;
@@ -168,7 +168,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   color: rgba(245, 240, 232, 0.78);
-  max-width: 740px;
+  max-width: 850px;
   margin-top: 1rem;
   line-height: 1.75;
   position: relative;
@@ -179,25 +179,43 @@ body {
   color: var(--accent);
 }
 
-.hero-bridge {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 50vh;
-  max-height: none;
-  object-fit: cover;
-  object-position: bottom center;
-  z-index: 0;
-  pointer-events: none;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  background: transparent;
+  color: var(--paper);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 100px;
+  border: 2px solid rgba(245, 240, 232, 0.5);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--paper);
+  color: var(--paper);
+  transform: translateY(-1px);
 }
 
 /* SECTIONS */
 .section {
   max-width: 940px;
   margin: 0 auto;
-  padding: 5rem 2rem;
+  padding: 3rem 2rem;
 }
 
 .section h2 {
@@ -257,7 +275,17 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin: 2.5rem 0;
+  margin: 1.25rem 0;
+}
+
+.card-grid-4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 900px) {
+  .card-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* Only the card grid: match cta-section width (1040px); section text stays 940px */
@@ -268,7 +296,7 @@ body {
     margin-left: -50px;
     margin-right: -50px;
   }
-  .section .connect-grid {
+  .section .proof-gallery {
     max-width: 1040px;
     width: calc(100% + 100px);
     margin-left: -50px;
@@ -278,6 +306,7 @@ body {
 
 @media (max-width: 800px) {
   .card-grid { grid-template-columns: 1fr; }
+  .card-grid-4 { grid-template-columns: 1fr; }
 }
 
 .card {
@@ -316,56 +345,117 @@ body {
   grid-column: 1 / -1;
 }
 
-/* PROJECT CARDS (can be links) */
-.project-card {
-  display: block;
-  background: var(--card-bg);
-  border: 1px solid var(--light-line);
-  border-radius: 12px;
-  padding: 1.8rem;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Black card (e.g. philosophy) */
+.card-dark {
+  background: #1a1a18;
+  border: none;
+  color: var(--paper);
+  padding: 4rem 3.5rem;
 }
-
-.project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-  color: var(--ink);
-}
-
-.project-card .card-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.8rem;
-}
-
-.project-card h3 {
+.card-dark .section-label { color: rgba(245, 240, 232, 0.7); }
+.card-dark h2 {
   font-family: 'Instrument Serif', serif;
-  font-size: 1.2rem;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.2;
   font-weight: 400;
-  margin-bottom: 0.5rem;
-}
-
-.project-card p {
-  font-size: 0.88rem;
-  color: var(--muted);
-  line-height: 1.6;
+  color: var(--paper);
   margin-bottom: 1rem;
 }
+.card-dark h2 .philosophy-accent {
+  color: var(--accent2);
+}
+.card-dark h3,
+.card-dark p { color: rgba(245, 240, 232, 0.85); }
+.card-dark p { margin-bottom: 1rem; }
+.card-dark p:last-child { margin-bottom: 0; }
 
-.project-card .card-cta {
-  font-size: 0.8rem;
-  font-weight: 600;
+/* Partners / Collaborated with */
+.partners-section {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.partners-card {
+  background: var(--card-bg);
+  border: none;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.section .partners-card {
+  margin-top: 2.5rem;
+  max-width: 1040px;
+  width: calc(100% + 100px);
+  margin-left: -50px;
+  margin-right: -50px;
+}
+.partners-card .section-label {
+  opacity: 0.6;
+}
+.partners-section .section-label {
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent);
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.partners-logos {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+.partners-logos .partner-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 48px;
+  flex-shrink: 0;
+}
+.partners-logos .partner-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.75;
+  transition: filter 0.2s, opacity 0.2s;
+}
+.partners-logos .partner-logo img:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* Proof gallery */
+.proof-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.proof-gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--light-line);
+}
+@media (max-width: 700px) {
+  .proof-gallery { grid-template-columns: 1fr; }
+  .proof-gallery img { height: 200px; }
 }
 
 /* CTA SECTION */
 .cta-section {
   max-width: 1040px;
-  margin: 3rem auto;
-  padding: 6rem 3.5rem;
+  margin: 1.8rem auto;
+  padding: 3.6rem 3.5rem;
   text-align: center;
   position: relative;
   background: #284032;
@@ -426,44 +516,6 @@ body {
   z-index: 1;
 }
 
-/* Glance stats (report-style cards) in CTA */
-.cta-section .glance-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin: 2rem 0 2.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-.cta-section .glance-stat {
-  text-align: center;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-}
-
-.cta-section .glance-stat .number {
-  font-family: 'Instrument Serif', serif;
-  font-size: 2.8rem;
-  color: var(--paper);
-  line-height: 1;
-}
-
-.cta-section .glance-stat .label {
-  font-size: 0.8rem;
-  color: rgba(245, 240, 232, 0.7);
-  margin-top: 0.4rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-@media (max-width: 650px) {
-  .cta-section .glance-grid { grid-template-columns: 1fr; }
-  .cta-section .glance-stat .number { font-size: 1.75rem; }
-}
-
 .btn-primary {
   display: inline-block;
   padding: 0.85rem 1.8rem;
@@ -484,65 +536,6 @@ body {
   transform: translateY(-1px);
 }
 
-/* STAY CONNECTED CARDS (dark-card style) */
-.connect-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin: 2.5rem 0;
-}
-
-@media (max-width: 800px) {
-  .connect-grid { grid-template-columns: 1fr; }
-}
-
-.connect-card {
-  display: block;
-  background: #1a1a18;
-  border: none;
-  border-radius: 12px;
-  padding: 2rem 1.8rem;
-  text-decoration: none;
-  color: var(--paper);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.connect-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-  color: var(--paper);
-}
-
-.connect-card h3 {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.15rem;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-  color: rgba(245, 240, 232, 0.95);
-}
-
-.connect-card p {
-  font-size: 0.88rem;
-  color: rgba(245, 240, 232, 0.85);
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-}
-
-.connect-card .handle {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--accent2);
-}
-
-.connect-card-icon {
-  display: block;
-  width: 32px;
-  height: 32px;
-  margin-bottom: 0.8rem;
-  object-fit: contain;
-  opacity: 0.9;
-}
-
 /* FOOTER */
 .footer {
   text-align: center;
@@ -553,11 +546,21 @@ body {
 }
 
 /* RESPONSIVE */
+@media (max-width: 1100px) {
+  .section .partners-card {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
 @media (max-width: 500px) {
   html { font-size: 15px; }
-  .hero { padding: 3rem var(--mobile-gutter); }
-  .section { padding: 3rem var(--mobile-gutter); }
-  .cta-section { padding: 4rem var(--mobile-gutter); }
+  .hero { padding: calc(var(--nav-height) + 3rem) var(--mobile-gutter) 5rem; }
+  .section { padding: 1.8rem var(--mobile-gutter); }
+  .partners-section { padding: 1.8rem var(--mobile-gutter); }
+  .partners-logos { flex-wrap: wrap; gap: 1.5rem; }
+  .partners-logos .partner-logo { width: 100px; height: 36px; }
+  .cta-section { padding: 2.4rem var(--mobile-gutter); }
   .nav { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
   .nav-toggle { display: flex; }
   .nav-links {
@@ -598,145 +601,141 @@ body {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
   <ul class="nav-links">
-    <li><a href="ai-education.html">AI Education</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="report.html">Read the Report</a></li>
   </ul>
 </nav>
 
-<!-- 1. HERO -->
+<!-- HERO -->
 <section class="hero">
-  <div id="hero-bg" style="position:absolute;inset:0;z-index:0;pointer-events:none;" aria-hidden="true"></div>
-  <h1>Welcome To <span class="hero-accent">Majoriti's</span> World</h1>
+  <h1><span class="hero-accent">From 0 to 1</span><br>in a world moving from 1 to 1,000</h1>
   <p class="hero-lead">
-    Majoriti is an R&D Lab based in Tel Aviv, researching and building infrastructure for collective work.
+    Majoriti is your partner in AI education. We design experiences that turn uncertainty into capability, one step at a time.
   </p>
   <p class="hero-sub">
-    We're driven by the belief that community is the antidote to an era of burnout and polarization… but for them to become a relevant force in society, we must take them seriously.
+    The AI revolution isn't waiting. New tools launch daily, headlines shift hourly, and it can feel like everyone else already speaks the language. We're here to close that gap — not with hype, but with hands-on education that meets you exactly where you are.
   </p>
-  <picture>
-    <source srcset="/assets/bridge_mobile-BfaUXBDR.png" media="(max-width: 640px)" />
-    <img src="/assets/bridge-CoLVe5AR.png" alt="" class="hero-bridge" />
-  </picture>
+  <div class="hero-actions">
+    <a href="#cta" class="btn-primary">Get Started</a>
+    <a href="#proof" class="btn-secondary">See Our Work</a>
+  </div>
 </section>
 
 <main class="site-content">
-<!-- 2. OUR CURRENT ERA -->
-<section class="section">
-  <h2>Something is broken. And we all feel it.</h2>
-  <p class="section-intro">
-    We've spoken to hundreds of people — different ages, different countries, different professions. And one feeling keeps surfacing: <strong>people are tired. Very tired.</strong>
-  </p>
-  <p class="section-intro">
-    Which is strange. We live in an era where almost everything is within reach, instantly accessible. So why are we running on empty?
-  </p>
 
+<!-- WHAT WE DO -->
+<section class="section">
+  <p class="section-label">What We Do</p>
+  <h2>Your AI education partner</h2>
+  <p>
+    Most AI education assumes you're already in the game. We don't. We start at zero — real zero — and build from there with practical, human-centered workshops that leave you with tools you'll actually use.
+  </p>
+  <p>
+    Whether you're a university preparing graduates for a shifting job market, a school looking to inspire the next generation, or a company ready to unlock your team's creative potential — we meet you where you are and walk alongside you.
+  </p>
+  <div class="partners-card">
+    <p class="section-label">Collaborated with</p>
+    <div class="partners-logos" aria-label="Partner logos">
+    <div class="partner-logo"><img src="/assets/imperial-BSseZL6W.png" alt="Imperial College London"></div>
+    <div class="partner-logo"><img src="/assets/reichman-CQHFmbrL.svg" alt="Reichman University"></div>
+    <div class="partner-logo"><img src="/assets/hanoar-BPeqhcOj.webp" alt="Hanoar Hatzioni Haolami"></div>
+    <div class="partner-logo"><img src="/assets/fluxfutures-CZxMw9-b.avif" alt="Fluxfutures"></div>
+    <div class="partner-logo"><img src="/assets/weavy-TsbedDSN.png" alt="Weavy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="section" id="how-we-work">
+  <p class="section-label">How We Work</p>
+  <h2>Flexible formats, real results</h2>
   <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">📱</div>
-      <h3>The Attention Trap</h3>
-      <p>Whenever we need a break, we scroll. But endless feeds don't restore anything, they consume what's left. What we call rest is quietly draining the little energy we have left.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🌐</div>
-      <h3>9-5 No More</h3>
-      <p>Work no longer stays at work because it lives in the same device we use for everything else. The line between life and labor has basically disappeared.</p>
-    </div>
     <div class="card">
       <div class="card-icon">⚡</div>
-      <h3>The Productivity Paradox</h3>
-      <p>AI makes us more productive? No question. But it also makes it harder to know when enough is enough. More capacity means more output means more pressure. The finish line keeps moving.</p>
+      <h3>Kickstart</h3>
+      <p>One-time workshops designed to demystify AI and put real tools in your hands in a single session.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>Partnership</h3>
+      <p>Recurring programs and embedded collaborations that build lasting AI fluency across your organization.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">◇</div>
+      <h3>White Label</h3>
+      <p>We power your AI education offering, so you can bring cutting-edge workshops to your own audience.</p>
     </div>
   </div>
-
-  <p>
-    Add to that consumerism without limits, disconnection from nature, and the slow erosion of life in community... and you start to understand why so many people feel like they're running a race with no destination.
-  </p>
-  <h2>But here's what we're also seeing: something is shifting.</h2>
-  <p>
-    People are starting to look for alternatives. They're craving quality over quantity. They're looking to slow down and be more present. These people don't want to run away, they are eager to create... but not at any cost.
-  </p>
-  <p>
-    <strong>That's not everyone. But if it sounds like you, Majoriti is being built for you.</strong>
-  </p>
 </section>
 
-<!-- 3. THE COMMUNITY PARADOX — INSIGHT REPORT -->
-<section class="cta-section">
-  <p class="section-label">The Community Paradox Insight Report</p>
-  <h2>We went deep. Here's what we found.</h2>
-  <p class="sub-heading">Communities are everywhere — and somehow, loneliness has never been higher. How is that possible?</p>
-  <div class="glance-grid">
-    <div class="glance-stat">
-      <div class="number">🌍 13</div>
-      <div class="label">Leaders</div>
-    </div>
-    <div class="glance-stat">
-      <div class="number">📍 5</div>
-      <div class="label">Countries</div>
-    </div>
-    <div class="glance-stat">
-      <div class="number">🧩 6</div>
-      <div class="label">Key Insights</div>
-    </div>
-  </div>
-  <p>
-    In our latest insight report, The Community Paradox, we explore why the rise of communities hasn't translated into genuine belonging — and what it will actually take to change that. It's our most honest and researched piece of thinking yet.
-  </p>
-  <a href="report.html" class="btn-primary">Read the Report →</a>
-</section>
-
-<!-- 4. OUR PROJECTS -->
+<!-- OUR PHILOSOPHY (black card) -->
 <section class="section">
-  <h2>What we're building</h2>
-  <p class="section-intro">Three parallel paths. One direction: building infrastructure for collective work.</p>
-
   <div class="card-grid">
-    <a href="ai-education.html" class="project-card">
-      <div class="card-icon">🧠</div>
-      <h3>Human-Centered AI Education</h3>
-      <p>We're building educational frameworks that put people at the forefront of this change.</p>
-      <span class="card-cta">Learn more →</span>
-    </a>
-    <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" class="project-card" target="_blank" rel="noopener noreferrer">
-      <div class="card-icon">🔗</div>
-      <h3>The Communiti</h3>
-      <p>Tools, knowledge, and a space for people who seriously care about community.</p>
-      <span class="card-cta">Join The Communiti →</span>
-    </a>
-    <a href="#" class="project-card">
-      <div class="card-icon">✦</div>
-      <h3>Majoriti Originals</h3>
-      <p>Our shared R&D space, where we're building infrastructure for community-driven work.</p>
-      <span class="card-cta">Explore our work →</span>
-    </a>
+    <div class="card card-dark card-span-full">
+      <p class="section-label">Our Philosophy</p>
+      <h2>Let AI do what AI does. <span class="philosophy-accent">Let humans do what only humans can.</span></h2>
+      <p>
+        We believe the real opportunity isn't in racing to keep up — it's in knowing what to hand off and what to hold onto. Creativity, empathy, intuition, collaboration, purpose. These aren't things AI replaces. They're things AI can amplify — if you know how.
+      </p>
+      <p>
+        That's what we teach.
+      </p>
+    </div>
   </div>
 </section>
 
-<!-- 5. STAY CONNECTED -->
+<!-- WHO WE WORK WITH -->
 <section class="section">
-  <h2>Let's stay in touch.</h2>
-  <p class="section-intro">We're just getting started — and we'd love to have you along for the ride.</p>
-
-  <div class="connect-grid">
-    <a href="https://www.instagram.com/majoriti.world/" class="connect-card" target="_blank" rel="noopener noreferrer">
-      <img class="connect-card-icon" src="/assets/instagram.png-B_h3mapb.webp" alt="Instagram" width="32" height="32">
-      <h3>Follow us on Instagram</h3>
-      <p>Behind-the-scenes thinking, ideas we're exploring, and the occasional thing that made us stop and reflect.</p>
-      <span class="handle">@majoriti.world</span>
-    </a>
-    <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" class="connect-card" target="_blank" rel="noopener noreferrer">
-      <img class="connect-card-icon" src="/assets/whatsapp-CUXeewY6.png" alt="WhatsApp" width="32" height="32">
-      <h3>Join The Communiti on WhatsApp</h3>
-      <p>A living, breathing group for people who believe in the power of collective work. No noise, just substance.</p>
-      <span class="handle">Join the group</span>
-    </a>
-    <a href="mailto:hello@majoriti.world" class="connect-card">
-      <img class="connect-card-icon" src="/assets/gmail.svg-D9ubYhns.webp" alt="Email" width="32" height="32">
-      <h3>Send us an email</h3>
-      <p>Have something to say, ask, or propose? We read everything.</p>
-      <span class="handle">hello@majoriti.world</span>
-    </a>
+  <p class="section-label">Who We Work With</p>
+  <h2>Built for the people who shape what's next</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card">
+      <div class="card-icon">🎓</div>
+      <h3>Universities</h3>
+      <p>Preparing graduates with the workflows and tools the professional world already expects.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📚</div>
+      <h3>Schools</h3>
+      <p>Sparking curiosity in students and confidence in teachers with the latest AI tools.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏢</div>
+      <h3>Companies</h3>
+      <p>Designing creative AI workflows that help teams execute better and innovate faster.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌍</div>
+      <h3>Delegations</h3>
+      <p>Giving international visitors a hands-on window into Israel's vibrant AI scene.</p>
+    </div>
   </div>
+</section>
+
+<!-- PROOF -->
+<section class="section" id="proof">
+  <p class="section-label">Proof</p>
+  <h2>Hundreds of people. Zero left behind.</h2>
+  <p>
+    We've partnered with Imperial College London, Reichman University, Hanoar Hatzioni Haolami, and Fluxfutures — training hundreds of students and professionals, each one starting from wherever they were and leaving with something real.
+  </p>
+  <div class="proof-gallery" aria-label="Proof gallery">
+    <img src="/assets/imperial-D04mcpt_.png" alt="Imperial College London workshop">
+    <img src="/assets/reichman-B0gxDA17.png" alt="Reichman University session">
+    <img src="/assets/hanoar-BOlET9wP.png" alt="Hanoar Hatzioni Haolami program">
+  </div>
+  <p>
+    From 100 high school graduates building products in 90-minute sessions, to academic collaborations with London design studios, to speculative design cohorts — every project starts at zero and ends with momentum.
+  </p>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <h2>Ready to go from 0 to 1?</h2>
+  <p>
+    The world won't slow down. But you don't have to figure it out alone. Let's build your AI fluency together.
+  </p>
+  <a href="mailto:hello@majoriti.world?subject=AI%20Education%20%E2%80%94%20Let%27s%20talk&body=Hi%2C%0A%0AI'm%20interested%20in%20Majoriti%27s%20AI%20education%20offerings%20and%20would%20like%20to%20discuss%20how%20we%20might%20work%20together.%0A%0ABest%20regards" class="btn-primary">Let's Talk</a>
 </section>
 
 <!-- FOOTER -->

@@ -6,6 +6,13 @@
 <title>The Community Paradox — Insight Report</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+@font-face {
+  font-family: 'Majoriti';
+  src: url('/assets/majoriti-VWrjIn9x.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --ink: #1a1a18;
   --paper: #f5f0e8;
@@ -71,8 +78,8 @@ body {
 .nav.nav-always-visible { transform: translateY(0); }
 
 .nav-logo {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.1rem;
+  font-family: 'Majoriti', 'Instrument Serif', serif;
+  font-size: 1.75rem;
   font-weight: 400;
   color: var(--ink);
   letter-spacing: -0.02em;
@@ -226,7 +233,7 @@ body {
 
 /* SECTIONS */
 .section {
-  max-width: 1040px;
+  max-width: 820px;
   margin: 0 auto;
   padding: 5rem 2rem;
 }
@@ -239,7 +246,7 @@ body {
 
 .section-divider {
   width: 100%;
-  max-width: 1040px;
+  max-width: 820px;
   margin: 0 auto;
   border: none;
   border-top: 1px solid var(--light-line);
@@ -398,7 +405,7 @@ p.lead {
 /* CLUSTER SECTIONS */
 .cluster {
   padding: 4rem 2rem;
-  max-width: 1040px;
+  max-width: 820px;
   margin: 0 auto;
 }
 
@@ -488,6 +495,7 @@ p.lead {
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
+  color: var(--accent2);
   opacity: 0.6;
   margin-bottom: 0.6rem;
 }
@@ -637,7 +645,7 @@ p.lead {
 
 /* BOTTOM SECTION MENU */
 .section-nav {
-  max-width: 1040px;
+  max-width: 820px;
   margin: 2.5rem auto 0;
   padding: 0 2rem 2rem;
 }
@@ -658,7 +666,7 @@ p.lead {
 
 /* CONTINUE HERE CARD */
 .continue-here-wrap {
-  max-width: 1040px;
+  max-width: 820px;
   margin: 1.25rem auto 0;
   padding: 0 2rem;
 }
@@ -739,7 +747,7 @@ p.lead {
 
 /* HOME SECTION CARDS */
 .home-section-cards {
-  max-width: 1040px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 3rem 2rem 5rem;
   display: grid;
@@ -778,7 +786,7 @@ p.lead {
   line-height: 1.5;
 }
 .home-disclaimer {
-  max-width: 1040px;
+  max-width: 900px;
   margin: 2rem auto 3rem;
   padding: 2rem;
   background: var(--ink);
@@ -940,7 +948,7 @@ p.lead {
         <p>
           This report maps the landscape, names the pain, and asks the questions that emerged from those conversations.
         </p>
-        <div class="pattern-box" style="max-width:1040px;margin:2rem auto;">
+        <div class="pattern-box" style="max-width:820px;margin:2rem auto;">
           <div class="pattern-label">About Majoriti</div>
           <p>Majoriti is an R&D Lab based in Tel Aviv, researching and building infrastructure for collective work. We believe communities are the antidote to burnout and polarization — but for them to become a relevant force in society, we must take them seriously.</p>
         </div>
@@ -971,7 +979,7 @@ p.lead {
   <div id="view-landscape" class="view-pane">
     <div class="view-inner">
       <section class="section-wide fade-in" id="landscape">
-  <div style="max-width:1040px;margin:0 auto;">
+  <div style="max-width:820px;margin:0 auto;">
     <div class="section-number">01 — The Landscape</div>
     <h2>A taxonomy of communities</h2>
     <p>
@@ -979,7 +987,7 @@ p.lead {
     </p>
   </div>
 
-  <div class="taxonomy-grid" style="max-width:1040px;margin:2rem auto;">
+  <div class="taxonomy-grid" style="max-width:900px;margin:2rem auto;">
     <div class="taxonomy-card">
       <div class="card-icon">🔥</div>
       <h4>Mission-Driven</h4>
@@ -1006,14 +1014,14 @@ p.lead {
     </div>
   </div>
 
-  <div style="max-width:1040px;margin:0 auto;">
+  <div style="max-width:820px;margin:0 auto;">
     <div class="pattern-box">
       <div class="pattern-label">🔍 Pattern we noticed</div>
       <p>Most communities are hybrids. Some sit in both mission-driven and identity-driven quadrants. A knowledge-driven community can become deeply experience-driven through in-person activities. The healthiest communities seem to operate in <strong>at least two quadrants</strong> — giving members multiple reasons to stay.</p>
     </div>
   </div>
 
-  <div style="max-width:1040px;margin:2.5rem auto 0;">
+  <div style="max-width:820px;margin:2.5rem auto 0;">
     <h3 style="font-family:'Instrument Serif',serif;font-size:1.5rem;font-weight:400;margin-bottom:1rem;">The Spectrum of Belonging</h3>
     <p>What brings people into a community varies deeply. At one extreme are <strong>grassroots communities</strong> — 100% built on choice. People come together around a shared interest; belonging is active and chosen. At the other extreme are communities you join almost <strong>by osmosis</strong> — like alumni networks, where graduating hands you a membership you didn't have to seek. In between sit communities rooted in <strong>shared identity</strong>: for example, being part of a minority group. You may not feel you "belong" anywhere in particular, but that identity creates a bridge — you recognise yourself in others, and a community that speaks to that experience can quickly feel like yours. This spectrum — from chosen belonging to given belonging, with identity as a middle ground — shapes how people show up and what they expect from the community.</p>
   </div>
@@ -1044,7 +1052,7 @@ p.lead {
   <div id="view-leaders" class="view-pane">
     <div class="view-inner">
       <section class="section-wide fade-in" id="leaders">
-  <div style="max-width:1040px;margin:0 auto;">
+  <div style="max-width:820px;margin:0 auto;">
     <div class="section-number">02 — Leader Types</div>
     <h2>Four kinds of community leaders</h2>
     <p>
@@ -1052,7 +1060,7 @@ p.lead {
     </p>
   </div>
 
-  <div class="leader-grid" style="max-width:1040px;margin:2rem auto;">
+  <div class="leader-grid" style="max-width:900px;margin:2rem auto;">
     <div class="leader-card accidental">
       <div class="card-emoji">🌱</div>
       <h4>The Accidental Founder</h4>
@@ -1079,7 +1087,7 @@ p.lead {
     </div>
   </div>
 
-  <div style="max-width:1040px;margin:0 auto;">
+  <div style="max-width:820px;margin:0 auto;">
     <div class="provocation">
       Every leader we interviewed wore at least two of these hats. The question isn't which type you are — it's which hat is missing.
     </div>

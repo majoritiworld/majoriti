@@ -157,7 +157,7 @@ body {
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--paper);
-  max-width: 740px;
+  max-width: 850px;
   margin-top: 2rem;
   line-height: 1.6;
   position: relative;
@@ -168,7 +168,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   color: rgba(245, 240, 232, 0.78);
-  max-width: 740px;
+  max-width: 850px;
   margin-top: 1rem;
   line-height: 1.75;
   position: relative;
@@ -215,7 +215,7 @@ body {
 .section {
   max-width: 940px;
   margin: 0 auto;
-  padding: 5rem 2rem;
+  padding: 3rem 2rem;
 }
 
 .section h2 {
@@ -253,6 +253,13 @@ body {
   color: var(--muted);
   margin-bottom: 2rem;
 }
+.section-intro a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.section-intro a:hover {
+  text-decoration: underline;
+}
 
 .section-label {
   font-size: 0.7rem;
@@ -268,7 +275,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin: 2.5rem 0;
+  margin: 1.25rem 0;
 }
 
 .card-grid-4 {
@@ -284,6 +291,12 @@ body {
 /* Only the card grid: match cta-section width (1040px); section text stays 940px */
 @media (min-width: 1100px) {
   .section .card-grid {
+    max-width: 1040px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+  }
+  .section .proof-gallery {
     max-width: 1040px;
     width: calc(100% + 100px);
     margin-left: -50px;
@@ -356,12 +369,29 @@ body {
 .card-dark p { margin-bottom: 1rem; }
 .card-dark p:last-child { margin-bottom: 0; }
 
-/* Partners / Worked with */
+/* Partners / Collaborated with */
 .partners-section {
-  max-width: 940px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 5rem 2rem;
+  padding: 3rem 2rem;
   text-align: center;
+}
+.partners-card {
+  background: var(--card-bg);
+  border: none;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.section .partners-card {
+  margin-top: 2.5rem;
+  max-width: 1040px;
+  width: calc(100% + 100px);
+  margin-left: -50px;
+  margin-right: -50px;
+}
+.partners-card .section-label {
+  opacity: 0.6;
 }
 .partners-section .section-label {
   font-size: 0.7rem;
@@ -407,7 +437,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 .proof-gallery img {
   width: 100%;
@@ -424,8 +454,8 @@ body {
 /* CTA SECTION */
 .cta-section {
   max-width: 1040px;
-  margin: 3rem auto;
-  padding: 6rem 3.5rem;
+  margin: 1.8rem auto;
+  padding: 3.6rem 3.5rem;
   text-align: center;
   position: relative;
   background: #284032;
@@ -516,14 +546,21 @@ body {
 }
 
 /* RESPONSIVE */
+@media (max-width: 1100px) {
+  .section .partners-card {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
 @media (max-width: 500px) {
   html { font-size: 15px; }
   .hero { padding: calc(var(--nav-height) + 3rem) var(--mobile-gutter) 5rem; }
-  .section { padding: 3rem var(--mobile-gutter); }
-  .partners-section { padding: 3rem var(--mobile-gutter); }
+  .section { padding: 1.8rem var(--mobile-gutter); }
+  .partners-section { padding: 1.8rem var(--mobile-gutter); }
   .partners-logos { flex-wrap: wrap; gap: 1.5rem; }
   .partners-logos .partner-logo { width: 100px; height: 36px; }
-  .cta-section { padding: 4rem var(--mobile-gutter); }
+  .cta-section { padding: 2.4rem var(--mobile-gutter); }
   .nav { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
   .nav-toggle { display: flex; }
   .nav-links {
@@ -596,16 +633,15 @@ body {
   <p>
     Whether you're a university preparing graduates for a shifting job market, a school looking to inspire the next generation, or a company ready to unlock your team's creative potential — we meet you where you are and walk alongside you.
   </p>
-</section>
-
-<!-- WORKED WITH -->
-<section class="partners-section">
-  <p class="section-label">Worked with</p>
-  <div class="partners-logos" aria-label="Partner logos">
+  <div class="partners-card">
+    <p class="section-label">Collaborated with</p>
+    <div class="partners-logos" aria-label="Partner logos">
     <div class="partner-logo"><img src="images/ai-education/partners/imperial.png" alt="Imperial College London"></div>
     <div class="partner-logo"><img src="images/ai-education/partners/reichman.svg" alt="Reichman University"></div>
     <div class="partner-logo"><img src="images/ai-education/partners/hanoar.webp" alt="Hanoar Hatzioni Haolami"></div>
     <div class="partner-logo"><img src="images/ai-education/partners/fluxfutures.avif" alt="Fluxfutures"></div>
+    <div class="partner-logo"><img src="images/ai-education/partners/weavy.png" alt="Weavy"></div>
+    </div>
   </div>
 </section>
 
@@ -699,7 +735,7 @@ body {
   <p>
     The world won't slow down. But you don't have to figure it out alone. Let's build your AI fluency together.
   </p>
-  <a href="mailto:hello@majoriti.world" class="btn-primary">Let's Talk</a>
+  <a href="mailto:hello@majoriti.world?subject=AI%20Education%20%E2%80%94%20Let%27s%20talk&body=Hi%2C%0A%0AI'm%20interested%20in%20Majoriti%27s%20AI%20education%20offerings%20and%20would%20like%20to%20discuss%20how%20we%20might%20work%20together.%0A%0ABest%20regards" class="btn-primary">Let's Talk</a>
 </section>
 
 <!-- FOOTER -->

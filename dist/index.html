@@ -17,7 +17,7 @@
   --ink: #1a1a18;
   --paper: #f5f0e8;
   --accent: #94a200;
-  --accent2: #2d6a4f;
+  --accent2: #C9A0CA;
   --muted: #8a8578;
   --light-line: #d9d3c7;
   --quote-bg: #ece7db;
@@ -178,7 +178,7 @@ body {
 
 /* SECTIONS */
 .section {
-  max-width: 820px;
+  max-width: 940px;
   margin: 0 auto;
   padding: 5rem 2rem;
 }
@@ -227,6 +227,22 @@ body {
   margin: 2.5rem 0;
 }
 
+/* Only the card grid: match cta-section width (1040px); section text stays 940px */
+@media (min-width: 1100px) {
+  .section .card-grid {
+    max-width: 1040px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+  }
+  .section .connect-grid {
+    max-width: 1040px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+  }
+}
+
 @media (max-width: 800px) {
   .card-grid { grid-template-columns: 1fr; }
 }
@@ -261,6 +277,10 @@ body {
   color: #555;
   line-height: 1.6;
   margin-bottom: 0;
+}
+
+.card-grid .card-span-full {
+  grid-column: 1 / -1;
 }
 
 /* PROJECT CARDS (can be links) */
@@ -310,7 +330,7 @@ body {
 
 /* CTA SECTION */
 .cta-section {
-  max-width: 820px;
+  max-width: 1040px;
   margin: 0 auto;
   padding: 5rem 2rem;
   text-align: center;
@@ -488,28 +508,26 @@ body {
     <div class="card">
       <div class="card-icon">📱</div>
       <h3>The Attention Trap</h3>
-      <p>Whenever we need a break, we scroll. But endless feeds don't restore us — they consume us. What we call "rest" has quietly become another form of work.</p>
+      <p>Whenever we need a break, we scroll. But endless feeds don't restore anything, they consume what's left. What we call rest is quietly draining the little energy we have left.</p>
     </div>
     <div class="card">
       <div class="card-icon">🌐</div>
-      <h3>Work Without Borders</h3>
-      <p>Work no longer stays at work. How could it? It lives in the same device we use to talk to our families, navigate the city, and order dinner. The line between life and labor has all but disappeared.</p>
+      <h3>9-5 No More</h3>
+      <p>Work no longer stays at work because it lives in the same device we use for everything else. The line between life and labor has basically disappeared.</p>
     </div>
     <div class="card">
       <div class="card-icon">⚡</div>
       <h3>The Productivity Paradox</h3>
-      <p>AI makes us more productive — no question. But it also makes it harder to know when enough is enough. More capacity, more output, more pressure. The finish line keeps moving.</p>
+      <p>AI makes us more productive? No question. But it also makes it harder to know when enough is enough. More capacity means more output means more pressure. The finish line keeps moving.</p>
     </div>
   </div>
 
   <p>
-    Add to that consumerism without limits, disconnection from nature, and the slow erosion of life in community — and you start to understand why so many people feel like they're running a race with no destination.
+    Add to that consumerism without limits, disconnection from nature, and the slow erosion of life in community... and you start to understand why so many people feel like they're running a race with no destination.
   </p>
+  <h2>But here's what we're also seeing: something is shifting.</h2>
   <p>
-    But here's what we're also seeing: something is shifting.
-  </p>
-  <p>
-    People are starting to look for alternatives. Craving quality over quantity. Choosing presence over productivity. They want to create — but not at any cost.
+    People are starting to look for alternatives. They're craving quality over quantity. They're looking to slow down and be more present. These people don't want to run away, they are eager to create... but not at any cost.
   </p>
   <p>
     That's not everyone. But if it sounds like you, Majoriti is being built for you.
@@ -529,14 +547,14 @@ body {
 <!-- 4. OUR PROJECTS -->
 <section class="section">
   <h2>What we're building</h2>
-  <p class="section-intro">Three projects. One direction: making collective work actually work.</p>
+  <p class="section-intro">Three parallel paths. One direction: building infrastructure for collective work.</p>
 
   <div class="card-grid">
     <a href="#" class="project-card">
       <div class="card-icon">🧠</div>
       <h3>Human-Centered AI Education</h3>
       <p>AI is reshaping how we learn, work, and create. But most of the conversation skips the human part. We're developing education frameworks that put people — their curiosity, their wellbeing, their agency — at the center of that shift.</p>
-      <span class="card-cta">Coming soon / Learn more →</span>
+      <span class="card-cta">Learn more →</span>
     </a>
     <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" class="project-card" target="_blank" rel="noopener noreferrer">
       <div class="card-icon">🔗</div>
@@ -579,7 +597,7 @@ body {
 
 <!-- FOOTER -->
 <footer class="footer">
-  <p>Majoriti Lab · Tel Aviv · Building infrastructure for the way people actually work — together.</p>
+  <p>Majoriti World Ltd. • Tel Aviv • Building infrastructure for collective work.</p>
 </footer>
 
 <script>

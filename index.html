@@ -17,7 +17,7 @@
   --ink: #1a1a18;
   --paper: #f5f0e8;
   --accent: #94a200;
-  --accent2: #2d6a4f;
+  --accent2: #C9A0CA;
   --muted: #8a8578;
   --light-line: #d9d3c7;
   --quote-bg: #ece7db;
@@ -32,6 +32,7 @@ html {
   scroll-behavior: smooth;
   font-size: 17px;
   scroll-padding-top: var(--nav-height);
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -40,6 +41,9 @@ body {
   background: var(--paper);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+.site-content {
   padding-left: max(var(--mobile-gutter), env(safe-area-inset-left));
   padding-right: max(var(--mobile-gutter), env(safe-area-inset-right));
 }
@@ -68,7 +72,7 @@ body {
 
 .nav-logo {
   font-family: 'Majoriti', 'Instrument Serif', serif;
-  font-size: 1.1rem;
+  font-size: 1.75rem;
   font-weight: 400;
   color: var(--ink);
   letter-spacing: -0.02em;
@@ -120,7 +124,7 @@ body {
   padding: 4rem 2rem 7rem;
   position: relative;
   overflow: visible;
-  background: #151F16;
+  background: #284032;
   color: var(--paper);
 }
 
@@ -144,16 +148,28 @@ body {
   line-height: 1.05;
   font-weight: 400;
   letter-spacing: -0.03em;
-  max-width: 900px;
+  max-width: 1040px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-lead {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--paper);
+  max-width: 740px;
+  margin-top: 2rem;
+  line-height: 1.6;
   position: relative;
   z-index: 1;
 }
 
 .hero-sub {
-  font-size: 1.15rem;
-  color: var(--paper);
-  max-width: 640px;
-  margin-top: 2rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(245, 240, 232, 0.78);
+  max-width: 740px;
+  margin-top: 1rem;
   line-height: 1.75;
   position: relative;
   z-index: 1;
@@ -179,7 +195,7 @@ body {
 
 /* SECTIONS */
 .section {
-  max-width: 820px;
+  max-width: 940px;
   margin: 0 auto;
   padding: 5rem 2rem;
 }
@@ -219,6 +235,22 @@ body {
   color: var(--muted);
   margin-bottom: 2rem;
 }
+.section-intro a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.section-intro a:hover {
+  text-decoration: underline;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
 
 /* CARDS */
 .card-grid {
@@ -226,6 +258,22 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin: 2.5rem 0;
+}
+
+/* Only the card grid: match cta-section width (1040px); section text stays 940px */
+@media (min-width: 1100px) {
+  .section .card-grid {
+    max-width: 1040px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+  }
+  .section .connect-grid {
+    max-width: 1040px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+  }
 }
 
 @media (max-width: 800px) {
@@ -262,6 +310,10 @@ body {
   color: #555;
   line-height: 1.6;
   margin-bottom: 0;
+}
+
+.card-grid .card-span-full {
+  grid-column: 1 / -1;
 }
 
 /* PROJECT CARDS (can be links) */
@@ -311,10 +363,32 @@ body {
 
 /* CTA SECTION */
 .cta-section {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 5rem 2rem;
+  max-width: 1040px;
+  margin: 3rem auto;
+  padding: 6rem 3.5rem;
   text-align: center;
+  position: relative;
+  background: #284032;
+  color: var(--paper);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(200,75,49,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(45,106,79,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(91,74,138,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cta-section h2,
+.cta-section p {
+  position: relative;
+  z-index: 1;
 }
 
 .cta-section h2 {
@@ -330,12 +404,64 @@ body {
   color: var(--accent);
   font-style: italic;
   margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .cta-section p {
   font-size: 1rem;
   line-height: 1.7;
   margin-bottom: 2rem;
+  color: rgba(245,240,232,0.95);
+}
+
+.cta-section .section-label {
+  color: rgba(245, 240, 232, 0.7);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section .btn-primary {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glance stats (report-style cards) in CTA */
+.cta-section .glance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2rem 0 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section .glance-stat {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+}
+
+.cta-section .glance-stat .number {
+  font-family: 'Instrument Serif', serif;
+  font-size: 2.8rem;
+  color: var(--paper);
+  line-height: 1;
+}
+
+.cta-section .glance-stat .label {
+  font-size: 0.8rem;
+  color: rgba(245, 240, 232, 0.7);
+  margin-top: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 650px) {
+  .cta-section .glance-grid { grid-template-columns: 1fr; }
+  .cta-section .glance-stat .number { font-size: 1.75rem; }
 }
 
 .btn-primary {
@@ -358,7 +484,7 @@ body {
   transform: translateY(-1px);
 }
 
-/* STAY CONNECTED CARDS */
+/* STAY CONNECTED CARDS (dark-card style) */
 .connect-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -372,19 +498,19 @@ body {
 
 .connect-card {
   display: block;
-  background: var(--card-bg);
-  border: 1px solid var(--light-line);
+  background: #1a1a18;
+  border: none;
   border-radius: 12px;
-  padding: 1.8rem;
+  padding: 2rem 1.8rem;
   text-decoration: none;
-  color: inherit;
+  color: var(--paper);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .connect-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-  color: var(--ink);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  color: var(--paper);
 }
 
 .connect-card h3 {
@@ -392,11 +518,12 @@ body {
   font-size: 1.15rem;
   font-weight: 400;
   margin-bottom: 0.5rem;
+  color: rgba(245, 240, 232, 0.95);
 }
 
 .connect-card p {
   font-size: 0.88rem;
-  color: var(--muted);
+  color: rgba(245, 240, 232, 0.85);
   line-height: 1.6;
   margin-bottom: 0.5rem;
 }
@@ -404,7 +531,16 @@ body {
 .connect-card .handle {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
-  color: var(--accent);
+  color: var(--accent2);
+}
+
+.connect-card-icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 0.8rem;
+  object-fit: contain;
+  opacity: 0.9;
 }
 
 /* FOOTER */
@@ -420,7 +556,8 @@ body {
 @media (max-width: 500px) {
   html { font-size: 15px; }
   .hero { padding: 3rem var(--mobile-gutter); }
-  .section, .cta-section { padding: 3rem var(--mobile-gutter); }
+  .section { padding: 3rem var(--mobile-gutter); }
+  .cta-section { padding: 4rem var(--mobile-gutter); }
   .nav { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
   .nav-toggle { display: flex; }
   .nav-links {
@@ -461,6 +598,7 @@ body {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
   <ul class="nav-links">
+    <li><a href="ai-education.html">AI Education</a></li>
     <li><a href="report.html">Read the Report</a></li>
   </ul>
 </nav>
@@ -469,8 +607,11 @@ body {
 <section class="hero">
   <div id="hero-bg" style="position:absolute;inset:0;z-index:0;pointer-events:none;" aria-hidden="true"></div>
   <h1>Welcome To <span class="hero-accent">Majoriti's</span> World</h1>
+  <p class="hero-lead">
+    Majoriti is an R&D Lab based in Tel Aviv, researching and building infrastructure for collective work.
+  </p>
   <p class="hero-sub">
-    Majoriti is an R&D Lab based in Tel Aviv, researching and building infrastructure for collective work. We believe communities are the antidote to burnout and polarization — but for them to become a relevant force in society, we must take them seriously.
+    We're driven by the belief that community is the antidote to an era of burnout and polarization… but for them to become a relevant force in society, we must take them seriously.
   </p>
   <picture>
     <source srcset="images/bridge_mobile.png" media="(max-width: 640px)" />
@@ -478,11 +619,12 @@ body {
   </picture>
 </section>
 
+<main class="site-content">
 <!-- 2. OUR CURRENT ERA -->
 <section class="section">
   <h2>Something is broken. And we all feel it.</h2>
   <p class="section-intro">
-    We've spoken to hundreds of people — different ages, different countries, different professions. And one feeling keeps surfacing: people are tired. Very tired.
+    We've spoken to hundreds of people — different ages, different countries, different professions. And one feeling keeps surfacing: <strong>people are tired. Very tired.</strong>
   </p>
   <p class="section-intro">
     Which is strange. We live in an era where almost everything is within reach, instantly accessible. So why are we running on empty?
@@ -492,38 +634,51 @@ body {
     <div class="card">
       <div class="card-icon">📱</div>
       <h3>The Attention Trap</h3>
-      <p>Whenever we need a break, we scroll. But endless feeds don't restore us — they consume us. What we call "rest" has quietly become another form of work.</p>
+      <p>Whenever we need a break, we scroll. But endless feeds don't restore anything, they consume what's left. What we call rest is quietly draining the little energy we have left.</p>
     </div>
     <div class="card">
       <div class="card-icon">🌐</div>
-      <h3>Work Without Borders</h3>
-      <p>Work no longer stays at work. How could it? It lives in the same device we use to talk to our families, navigate the city, and order dinner. The line between life and labor has all but disappeared.</p>
+      <h3>9-5 No More</h3>
+      <p>Work no longer stays at work because it lives in the same device we use for everything else. The line between life and labor has basically disappeared.</p>
     </div>
     <div class="card">
       <div class="card-icon">⚡</div>
       <h3>The Productivity Paradox</h3>
-      <p>AI makes us more productive — no question. But it also makes it harder to know when enough is enough. More capacity, more output, more pressure. The finish line keeps moving.</p>
+      <p>AI makes us more productive? No question. But it also makes it harder to know when enough is enough. More capacity means more output means more pressure. The finish line keeps moving.</p>
     </div>
   </div>
 
   <p>
-    Add to that consumerism without limits, disconnection from nature, and the slow erosion of life in community — and you start to understand why so many people feel like they're running a race with no destination.
+    Add to that consumerism without limits, disconnection from nature, and the slow erosion of life in community... and you start to understand why so many people feel like they're running a race with no destination.
+  </p>
+  <h2>But here's what we're also seeing: something is shifting.</h2>
+  <p>
+    People are starting to look for alternatives. They're craving quality over quantity. They're looking to slow down and be more present. These people don't want to run away, they are eager to create... but not at any cost.
   </p>
   <p>
-    But here's what we're also seeing: something is shifting.
-  </p>
-  <p>
-    People are starting to look for alternatives. Craving quality over quantity. Choosing presence over productivity. They want to create — but not at any cost.
-  </p>
-  <p>
-    That's not everyone. But if it sounds like you, Majoriti is being built for you.
+    <strong>That's not everyone. But if it sounds like you, Majoriti is being built for you.</strong>
   </p>
 </section>
 
 <!-- 3. THE COMMUNITY PARADOX — INSIGHT REPORT -->
 <section class="cta-section">
+  <p class="section-label">The Community Paradox Insight Report</p>
   <h2>We went deep. Here's what we found.</h2>
   <p class="sub-heading">Communities are everywhere — and somehow, loneliness has never been higher. How is that possible?</p>
+  <div class="glance-grid">
+    <div class="glance-stat">
+      <div class="number">🌍 13</div>
+      <div class="label">Leaders</div>
+    </div>
+    <div class="glance-stat">
+      <div class="number">📍 5</div>
+      <div class="label">Countries</div>
+    </div>
+    <div class="glance-stat">
+      <div class="number">🧩 6</div>
+      <div class="label">Key Insights</div>
+    </div>
+  </div>
   <p>
     In our latest insight report, The Community Paradox, we explore why the rise of communities hasn't translated into genuine belonging — and what it will actually take to change that. It's our most honest and researched piece of thinking yet.
   </p>
@@ -533,25 +688,25 @@ body {
 <!-- 4. OUR PROJECTS -->
 <section class="section">
   <h2>What we're building</h2>
-  <p class="section-intro">Three projects. One direction: making collective work actually work.</p>
+  <p class="section-intro">Three parallel paths. One direction: building infrastructure for collective work.</p>
 
   <div class="card-grid">
-    <a href="#" class="project-card">
+    <a href="ai-education.html" class="project-card">
       <div class="card-icon">🧠</div>
       <h3>Human-Centered AI Education</h3>
-      <p>AI is reshaping how we learn, work, and create. But most of the conversation skips the human part. We're developing education frameworks that put people — their curiosity, their wellbeing, their agency — at the center of that shift.</p>
-      <span class="card-cta">Coming soon / Learn more →</span>
+      <p>We're building educational frameworks that put people at the forefront of this change.</p>
+      <span class="card-cta">Learn more →</span>
     </a>
     <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" class="project-card" target="_blank" rel="noopener noreferrer">
       <div class="card-icon">🔗</div>
       <h3>The Communiti</h3>
-      <p>Tools, resources, and a network for people who take community seriously. Whether you're building one, leading one, or trying to find yours — The Communiti is where the practice lives.</p>
+      <p>Tools, knowledge, and a space for people who seriously care about community.</p>
       <span class="card-cta">Join The Communiti →</span>
     </a>
     <a href="#" class="project-card">
       <div class="card-icon">✦</div>
       <h3>Majoriti Originals</h3>
-      <p>Our collective R&D lab, where we design and test infrastructure for community-driven work. Part research, part experiment, entirely open to what we find.</p>
+      <p>Our shared R&D space, where we're building infrastructure for community-driven work.</p>
       <span class="card-cta">Explore our work →</span>
     </a>
   </div>
@@ -564,16 +719,19 @@ body {
 
   <div class="connect-grid">
     <a href="https://www.instagram.com/majoriti.world/" class="connect-card" target="_blank" rel="noopener noreferrer">
+      <img class="connect-card-icon" src="images/favicons/instagram.png.webp" alt="Instagram" width="32" height="32">
       <h3>Follow us on Instagram</h3>
       <p>Behind-the-scenes thinking, ideas we're exploring, and the occasional thing that made us stop and reflect.</p>
       <span class="handle">@majoriti.world</span>
     </a>
     <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" class="connect-card" target="_blank" rel="noopener noreferrer">
+      <img class="connect-card-icon" src="images/favicons/whatsapp.png" alt="WhatsApp" width="32" height="32">
       <h3>Join The Communiti on WhatsApp</h3>
       <p>A living, breathing group for people who believe in the power of collective work. No noise, just substance.</p>
       <span class="handle">Join the group</span>
     </a>
     <a href="mailto:hello@majoriti.world" class="connect-card">
+      <img class="connect-card-icon" src="images/favicons/gmail.svg.webp" alt="Email" width="32" height="32">
       <h3>Send us an email</h3>
       <p>Have something to say, ask, or propose? We read everything.</p>
       <span class="handle">hello@majoriti.world</span>
@@ -583,8 +741,9 @@ body {
 
 <!-- FOOTER -->
 <footer class="footer">
-  <p>Majoriti Lab · Tel Aviv · Building infrastructure for the way people actually work — together.</p>
+  <p>Majoriti World Ltd. • Tel Aviv • Building infrastructure for collective work.</p>
 </footer>
+</main>
 
 <script>
 (function() {

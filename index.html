@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Community Paradox — Insight Report</title>
+<title>Majoriti — R&D Lab for Collective Work</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -15,13 +15,7 @@
   --light-line: #d9d3c7;
   --quote-bg: #ece7db;
   --card-bg: #faf7f1;
-  --cluster1: #c84b31;
-  --cluster2: #2d6a4f;
-  --cluster3: #b8860b;
-  --cluster4: #5b4a8a;
-  --cluster5: #2e6b8a;
-  --cluster6: #8b4e6a;
-  --mobile-gutter: 1.5rem; /* 24px – standard content margin for mobile */
+  --mobile-gutter: 1.5rem;
   --nav-height: 3.25rem;
 }
 
@@ -63,12 +57,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transform: translateY(-100%);
-  transition: transform 0.4s ease;
 }
-
-.nav.visible { transform: translateY(0); }
-.nav.nav-always-visible { transform: translateY(0); }
 
 .nav-logo {
   font-family: 'Instrument Serif', serif;
@@ -140,20 +129,9 @@ body {
   pointer-events: none;
 }
 
-.hero-overline {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  font-weight: 600;
-  margin-bottom: 2rem;
-  position: relative;
-  z-index: 1;
-}
-
 .hero h1 {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(2.8rem, 7vw, 5rem);
   line-height: 1.05;
   font-weight: 400;
   letter-spacing: -0.03em;
@@ -162,66 +140,14 @@ body {
   z-index: 1;
 }
 
-.hero h1 em {
-  font-style: italic;
-  color: var(--accent);
-}
-
 .hero-sub {
   font-size: 1.15rem;
   color: var(--muted);
-  max-width: 560px;
+  max-width: 640px;
   margin-top: 2rem;
-  line-height: 1.7;
+  line-height: 1.75;
   position: relative;
   z-index: 1;
-}
-
-.hero-meta {
-  margin-top: 3rem;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-meta span {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.scroll-hint {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--muted);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  animation: bob 2s ease-in-out infinite;
-}
-
-@keyframes bob {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(8px); }
-}
-
-.scroll-hint svg {
-  width: 20px;
-  height: 20px;
-  stroke: var(--muted);
 }
 
 /* SECTIONS */
@@ -231,30 +157,7 @@ body {
   padding: 5rem 2rem;
 }
 
-.section-wide {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 5rem 2rem;
-}
-
-.section-divider {
-  width: 100%;
-  max-width: 820px;
-  margin: 0 auto;
-  border: none;
-  border-top: 1px solid var(--light-line);
-}
-
-.section-number {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-h2 {
+.section h2 {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.15;
@@ -263,7 +166,7 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
-h3 {
+.section h3 {
   font-family: 'Instrument Serif', serif;
   font-size: 1.6rem;
   line-height: 1.25;
@@ -272,31 +175,37 @@ h3 {
   margin-bottom: 1rem;
 }
 
-p {
+.section p {
   margin-bottom: 1.2rem;
   font-size: 1rem;
   color: var(--ink);
 }
 
-p.lead {
+.section .lead {
   font-size: 1.15rem;
   line-height: 1.75;
   color: #444;
 }
 
-/* TAXONOMY GRID */
-.taxonomy-grid {
+.section-intro {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+/* CARDS */
+.card-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin: 2.5rem 0;
 }
 
-@media (max-width: 650px) {
-  .taxonomy-grid { grid-template-columns: 1fr; }
+@media (max-width: 800px) {
+  .card-grid { grid-template-columns: 1fr; }
 }
 
-.taxonomy-card {
+.card {
   background: var(--card-bg);
   border: 1px solid var(--light-line);
   border-radius: 12px;
@@ -304,281 +213,171 @@ p.lead {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.taxonomy-card:hover {
+.card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(0,0,0,0.06);
 }
 
-.taxonomy-card .card-icon {
+.card .card-icon {
   font-size: 1.6rem;
   margin-bottom: 0.8rem;
 }
 
-.taxonomy-card h4 {
+.card h3 {
   font-family: 'Instrument Serif', serif;
   font-size: 1.25rem;
   font-weight: 400;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
-.taxonomy-card p {
-  font-size: 0.88rem;
-  color: var(--muted);
-  margin-bottom: 0.7rem;
+.card p {
+  font-size: 0.9rem;
+  color: #555;
   line-height: 1.6;
+  margin-bottom: 0;
 }
 
-.taxonomy-card .examples {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: var(--accent2);
-  letter-spacing: 0.02em;
-}
-
-/* LEADER TYPES */
-.leader-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin: 2.5rem 0;
-}
-
-@media (max-width: 650px) {
-  .leader-grid { grid-template-columns: 1fr; }
-}
-
-.leader-card {
+/* PROJECT CARDS (can be links) */
+.project-card {
+  display: block;
   background: var(--card-bg);
   border: 1px solid var(--light-line);
   border-radius: 12px;
   padding: 1.8rem;
-  position: relative;
-  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.leader-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  color: var(--ink);
 }
 
-.leader-card.accidental::before { background: var(--cluster2); }
-.leader-card.steward::before { background: var(--cluster5); }
-.leader-card.mission::before { background: var(--cluster1); }
-.leader-card.connector::before { background: var(--cluster4); }
-
-.leader-card .card-emoji {
-  font-size: 1.4rem;
-  margin-bottom: 0.6rem;
-}
-
-.leader-card h4 {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin-bottom: 0.4rem;
-}
-
-.leader-card .subtitle {
-  font-size: 0.78rem;
-  font-style: italic;
-  color: var(--muted);
+.project-card .card-icon {
+  font-size: 1.5rem;
   margin-bottom: 0.8rem;
 }
 
-.leader-card p {
-  font-size: 0.88rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-/* CLUSTER SECTIONS */
-.cluster {
-  padding: 4rem 2rem;
-  max-width: 820px;
-  margin: 0 auto;
-}
-
-.cluster-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.cluster-emoji {
-  font-size: 2.2rem;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 0.3rem;
-}
-
-.cluster-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  padding: 0.25rem 0.6rem;
-  border-radius: 4px;
-  color: white;
-  display: inline-block;
+.project-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
   margin-bottom: 0.5rem;
 }
 
-.cluster h2 {
-  margin-bottom: 0.3rem;
-}
-
-.cluster .cluster-subtitle {
-  font-size: 0.95rem;
+.project-card p {
+  font-size: 0.88rem;
   color: var(--muted);
-  font-style: italic;
-  margin-bottom: 0;
-}
-
-/* QUOTE */
-.quote-block {
-  background: var(--quote-bg);
-  border-left: 3px solid var(--light-line);
-  border-radius: 0 10px 10px 0;
-  padding: 1.5rem 1.8rem;
-  margin: 2rem 0;
-  position: relative;
-}
-
-.quote-block p {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.1rem;
   line-height: 1.6;
-  font-style: italic;
-  color: #333;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
 }
 
-.quote-block .attribution {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.78rem;
-  font-style: normal;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.quote-block.accent-1 { border-left-color: var(--cluster1); }
-.quote-block.accent-2 { border-left-color: var(--cluster2); }
-.quote-block.accent-3 { border-left-color: var(--cluster3); }
-.quote-block.accent-4 { border-left-color: var(--cluster4); }
-.quote-block.accent-5 { border-left-color: var(--cluster5); }
-.quote-block.accent-6 { border-left-color: var(--cluster6); }
-
-/* PATTERN BOX */
-.pattern-box {
-  background: var(--ink);
-  color: var(--paper);
-  border-radius: 12px;
-  padding: 1.8rem 2rem;
-  margin: 2rem 0;
-}
-
-.pattern-box .pattern-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  opacity: 0.6;
-  margin-bottom: 0.6rem;
-}
-
-.pattern-box p {
-  color: var(--paper);
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 0;
-}
-
-/* PROVOCATION */
-.provocation {
-  text-align: center;
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.3rem;
-  font-style: italic;
-  color: var(--accent);
-  margin: 2.5rem auto;
-  max-width: 550px;
-  line-height: 1.5;
-}
-
-/* AT A GLANCE */
-.glance-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.glance-stat {
-  text-align: center;
-  padding: 1.5rem;
-  background: var(--card-bg);
-  border: 1px solid var(--light-line);
-  border-radius: 10px;
-}
-
-.glance-stat .number {
-  font-family: 'Instrument Serif', serif;
-  font-size: 2.8rem;
-  color: var(--ink);
-  line-height: 1;
-}
-
-.glance-stat .label {
+.project-card .card-cta {
   font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 0.4rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  color: var(--accent);
 }
 
-/* CLOSING */
-.closing {
-  text-align: left;
-  padding: 6rem 2rem;
+/* CTA SECTION */
+.cta-section {
   max-width: 820px;
   margin: 0 auto;
+  padding: 5rem 2rem;
+  text-align: center;
 }
 
-.closing h2 {
-  margin-bottom: 2rem;
+.cta-section h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
 }
 
-.takeaway-list {
-  text-align: left;
-  max-width: 820px;
-  margin: 0 auto 2.5rem;
-}
-
-.takeaway-item {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+.cta-section .sub-heading {
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-style: italic;
   margin-bottom: 1.5rem;
 }
 
-.takeaway-number {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.8rem;
-  color: var(--accent);
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
+.cta-section p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
 }
 
-.takeaway-item p {
-  font-size: 0.95rem;
-  margin-bottom: 0;
+.btn-primary {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  background: var(--accent);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: #7d8c00;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* STAY CONNECTED CARDS */
+.connect-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+@media (max-width: 800px) {
+  .connect-grid { grid-template-columns: 1fr; }
+}
+
+.connect-card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--light-line);
+  border-radius: 12px;
+  padding: 1.8rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.connect-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  color: var(--ink);
+}
+
+.connect-card h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.connect-card p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.connect-card .handle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
 }
 
 /* FOOTER */
@@ -590,222 +389,11 @@ p.lead {
   color: var(--muted);
 }
 
-.footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-/* FADE IN ANIMATION */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* TABLE OF CONTENTS */
-.toc {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin: 2rem 0;
-  justify-content: center;
-}
-
-.toc a {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  text-decoration: none;
-  padding: 0.4rem 0.9rem;
-  border: 1px solid var(--light-line);
-  border-radius: 100px;
-  transition: all 0.2s;
-  font-weight: 500;
-}
-
-.toc a:hover {
-  border-color: var(--ink);
-  color: var(--ink);
-  background: white;
-}
-
-/* BOTTOM SECTION MENU */
-.section-nav {
-  max-width: 820px;
-  margin: 2.5rem auto 0;
-  padding: 0 2rem 2rem;
-}
-
-.section-nav .toc {
-  margin-top: 1rem;
-}
-
-.section-nav-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  text-align: center;
-  margin: 0;
-}
-
-/* CONTINUE HERE CARD */
-.continue-here-wrap {
-  max-width: 820px;
-  margin: 1.25rem auto 0;
-  padding: 0 2rem;
-}
-
-.continue-here-card .card-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.6rem;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.continue-here-card {
-  display: block;
-  background: var(--card-bg);
-  border: 1px solid var(--light-line);
-  border-radius: 12px;
-  padding: 1.5rem 1.8rem;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  text-align: center;
-}
-
-.continue-here-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-  color: var(--ink);
-}
-
-.continue-here-card .continue-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
-}
-
-.continue-here-card .continue-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.25rem;
-  font-weight: 400;
-  margin-bottom: 0.4rem;
-}
-
-.continue-here-card .continue-abstract {
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.55;
-  margin-bottom: 0;
-}
-
-/* BILINGUAL QUOTE INDICATOR */
-.lang-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  opacity: 0.7;
-  margin-bottom: 0.3rem;
-  display: block;
-}
-
-/* VIEW PANES */
-#report-views { position: relative; padding-top: var(--nav-height); }
-.view-pane {
-  display: none;
-  min-height: 100vh;
-}
-.view-pane.active {
-  display: block;
-}
-.view-pane .view-inner {
-  padding-bottom: 4rem;
-}
-
-/* HOME SECTION CARDS */
-.home-section-cards {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 3rem 2rem 5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.25rem;
-}
-.home-section-card {
-  display: block;
-  background: var(--card-bg);
-  border: 1px solid var(--light-line);
-  border-radius: 12px;
-  padding: 1.5rem 1.8rem;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.home-section-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-  color: var(--ink);
-}
-.home-section-card .card-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.6rem;
-}
-.home-section-card h3 {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin-bottom: 0.35rem;
-}
-.home-section-card p {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-bottom: 0;
-  line-height: 1.5;
-}
-.home-disclaimer {
-  max-width: 900px;
-  margin: 2rem auto 3rem;
-  padding: 2rem;
-  background: var(--ink);
-  border-radius: 12px;
-  font-size: 1rem;
-  line-height: 1.75;
-}
-.home-disclaimer,
-.home-disclaimer p {
-  color: var(--paper);
-}
-
-.home-explore-label {
-  text-align: center;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-/* RESPONSIVE – mobile gutter follows best practice (24px / 1.5rem) */
+/* RESPONSIVE */
 @media (max-width: 500px) {
   html { font-size: 15px; }
   .hero { padding: 3rem var(--mobile-gutter); }
-  .section, .cluster { padding: 3rem var(--mobile-gutter); }
+  .section, .cta-section { padding: 3rem var(--mobile-gutter); }
   .nav { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
   .nav-toggle { display: flex; }
   .nav-links {
@@ -833,677 +421,143 @@ p.lead {
     padding: 0.85rem 0;
     font-size: 0.8rem;
   }
-  .hero-meta { flex-direction: column; align-items: center; gap: 0.8rem; }
-  .home-section-cards { grid-template-columns: 1fr; padding: 2rem var(--mobile-gutter) 5rem; }
-  .glance-stat .number { font-size: 1.75rem; }
-  .home-section-card .card-icon { font-size: 1.1rem; }
-  .section-nav { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
   .footer { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
-  .closing { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
 }
 </style>
 </head>
 <body>
 
 <!-- NAVIGATION -->
-<nav class="nav nav-always-visible" id="nav">
-  <a href="#home" class="nav-logo">Majoriti</a>
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">Majoriti</a>
   <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
   <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#context">Context</a></li>
-    <li><a href="#landscape">Landscape</a></li>
-    <li><a href="#leaders">Leaders</a></li>
-    <li><a href="#findings">Findings</a></li>
-    <li><a href="#closing">Takeaways</a></li>
+    <li><a href="report.html">Read the Report</a></li>
   </ul>
 </nav>
 
-<div id="report-views">
-  <!-- VIEW: HOME -->
-  <div id="view-home" class="view-pane active">
-    <section class="hero">
-      <div class="hero-overline">Insight Report — February 2026</div>
-      <h1>The Community <em>Paradox</em></h1>
-      <p class="hero-sub">
-        Communities are everywhere, yet leaders are building them intuitively, one crisis at a time, without the tools or structures to sustain what they've created.
-      </p>
-      <div class="glance-grid">
-        <div class="glance-stat">
-          <div class="number">🌍 13</div>
-          <div class="label">Leaders</div>
-        </div>
-        <div class="glance-stat">
-          <div class="number">📍 5</div>
-          <div class="label">Countries</div>
-        </div>
-        <div class="glance-stat">
-          <div class="number">🧩 6</div>
-          <div class="label">Key Insights</div>
-        </div>
-      </div>
-      <div class="home-disclaimer">
-        <p>This report was built after 13 interviews with people in leadership positions across communities. We hope it brings clarity on the kinds of communities and leaders that exist, the main pain points they share, and actionable insights you can use in your own community.</p>
-      </div>
-      <div class="scroll-hint">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-        Choose a section to explore
-      </div>
-    </section>
-    <p class="home-explore-label">Click a section below to jump there, or use the menu above to move through the report.</p>
-    <div class="home-section-cards">
-      <a href="#context" class="home-section-card">
-        <div class="card-icon">📋</div>
-        <h3>Context</h3>
-        <p>Why this report exists</p>
-      </a>
-      <a href="#landscape" class="home-section-card">
-        <div class="card-icon">🗺</div>
-        <h3>Landscape</h3>
-        <p>A taxonomy of communities</p>
-      </a>
-      <a href="#leaders" class="home-section-card">
-        <div class="card-icon">👤</div>
-        <h3>Leaders</h3>
-        <p>Four kinds of community leaders</p>
-      </a>
-      <a href="#findings" class="home-section-card">
-        <div class="card-icon">🔬</div>
-        <h3>Findings</h3>
-        <p>The 6 pain clusters</p>
-      </a>
-      <a href="#closing" class="home-section-card">
-        <div class="card-icon">✦</div>
-        <h3>Takeaways</h3>
-        <p>Five things we'll remember</p>
-      </a>
-    </div>
-  </div>
+<!-- 1. HERO -->
+<section class="hero">
+  <div id="hero-bg" style="position:absolute;inset:0;z-index:0;pointer-events:none;" aria-hidden="true"></div>
+  <h1>Welcome To Majoriti's World</h1>
+  <p class="hero-sub">
+    Majoriti is an R&D Lab based in Tel Aviv, researching and building infrastructure for collective work. We believe communities are the antidote to burnout and polarization — but for them to become a relevant force in society, we must take them seriously.
+  </p>
+</section>
 
-  <!-- VIEW: CONTEXT -->
-  <div id="view-context" class="view-pane">
-    <div class="view-inner">
-      <section class="section fade-in">
-        <div class="section-number">00 — Context</div>
-        <h2>Why this report exists</h2>
-        <p class="lead">
-          We set out to understand what communities actually are — and what holds them back. Not from textbooks, but from the people building them with their own hands, time, and often their own money.
-        </p>
-        <p>
-          We interviewed 13 community leaders across Israel, Latin America, and the U.S. Their communities range from a slime mold enthusiast group to one of the world's top scientific institutions. From a fitness movement in Panama City to a Kabbalah study circle over Zoom. From a university alumni network to a food rescue nonprofit. 
-        </p>
-        <p>
-          What they share is more interesting than what separates them. Every single one described a moment of accidental discovery — a realization that what they were building was bigger than the project, the class, or the event. It was a living thing.
-        </p>
-        <p>
-          This report maps the landscape, names the pain, and asks the questions that emerged from those conversations.
-        </p>
-        <div class="pattern-box" style="max-width:820px;margin:2rem auto;">
-          <div class="pattern-label">About Majoriti</div>
-          <p>Majoriti is an R&D Lab based in Tel Aviv, researching and building infrastructure for collective work. We believe communities are the antidote to burnout and polarization — but for them to become a relevant force in society, we must take them seriously.</p>
-        </div>
-      </section>
-      <div class="continue-here-wrap">
-        <a href="#landscape" class="continue-here-card fade-in">
-          <div class="card-icon">🗺</div>
-          <p class="continue-label">Continue here</p>
-          <p class="continue-title">01 — The Landscape</p>
-          <p class="continue-abstract">A taxonomy of communities: how purpose and structure shape the four types we found.</p>
-        </a>
-      </div>
-      <nav class="section-nav" aria-label="Report sections">
-        <p class="section-nav-label">Explore other sections</p>
-        <div class="toc">
-          <a href="#home">Home</a>
-          <a href="#context">Context</a>
-          <a href="#landscape">Landscape</a>
-          <a href="#leaders">Leaders</a>
-          <a href="#findings">Findings</a>
-          <a href="#closing">Closing</a>
-        </div>
-      </nav>
-    </div>
-  </div>
+<!-- 2. OUR CURRENT ERA -->
+<section class="section">
+  <h2>Something is broken. And we all feel it.</h2>
+  <p class="section-intro">
+    We've spoken to hundreds of people — different ages, different countries, different professions. And one feeling keeps surfacing: people are tired. Very tired.
+  </p>
+  <p class="section-intro">
+    Which is strange. We live in an era where almost everything is within reach, instantly accessible. So why are we running on empty?
+  </p>
 
-  <!-- VIEW: LANDSCAPE -->
-  <div id="view-landscape" class="view-pane">
-    <div class="view-inner">
-      <section class="section-wide fade-in" id="landscape">
-  <div style="max-width:820px;margin:0 auto;">
-    <div class="section-number">01 — The Landscape</div>
-    <h2>A taxonomy of communities</h2>
-    <p>
-      No two communities we spoke to were alike. But patterns emerged. We found that communities tend to organize along two axes: <strong>what draws people in</strong> (the purpose) and <strong>what holds them up</strong> (the structure). Here are the four types of community we identified.
-    </p>
-  </div>
-
-  <div class="taxonomy-grid" style="max-width:900px;margin:2rem auto;">
-    <div class="taxonomy-card">
-      <div class="card-icon">🔥</div>
-      <h4>Mission-Driven</h4>
-      <p>Built around a cause, a belief system, or a desire to change something in the world. The community exists <em>because</em> of the mission — and often dies without it.</p>
-      <div class="examples">Food rescue · Spiritual community · Social enterprise · Diaspora (mission dimension)</div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <h3>The Attention Trap</h3>
+      <p>Whenever we need a break, we scroll. But endless feeds don't restore us — they consume us. What we call "rest" has quietly become another form of work.</p>
     </div>
-    <div class="taxonomy-card">
-      <div class="card-icon">🔬</div>
-      <h4>Knowledge-Driven</h4>
-      <p>Built around shared curiosity, learning, or expertise. Members come to know — and stay because knowing together is better than knowing alone.</p>
-      <div class="examples">Citizen science · Scientific institute · Professional network · Philosophy circle</div>
+    <div class="card">
+      <div class="card-icon">🌐</div>
+      <h3>Work Without Borders</h3>
+      <p>Work no longer stays at work. How could it? It lives in the same device we use to talk to our families, navigate the city, and order dinner. The line between life and labor has all but disappeared.</p>
     </div>
-    <div class="taxonomy-card">
+    <div class="card">
       <div class="card-icon">⚡</div>
-      <h4>Experience-Driven</h4>
-      <p>Built around a shared activity — the doing <em>is</em> the bonding. The community is what happens in the spaces between reps, runs, and rounds.</p>
-      <div class="examples">Wellness community · Startup (product community)</div>
-    </div>
-    <div class="taxonomy-card">
-      <div class="card-icon">🪞</div>
-      <h4>Identity-Driven</h4>
-      <p>Built around belonging to a group — alumni, diaspora, a shared background. You don't join for what they do, but for who you are when you're there.</p>
-      <div class="examples">Alumni network · Diaspora community</div>
+      <h3>The Productivity Paradox</h3>
+      <p>AI makes us more productive — no question. But it also makes it harder to know when enough is enough. More capacity, more output, more pressure. The finish line keeps moving.</p>
     </div>
   </div>
 
-  <div style="max-width:820px;margin:0 auto;">
-    <div class="pattern-box">
-      <div class="pattern-label">🔍 Pattern we noticed</div>
-      <p>Most communities are hybrids. Some sit in both mission-driven and identity-driven quadrants. A knowledge-driven community can become deeply experience-driven through in-person activities. The healthiest communities seem to operate in <strong>at least two quadrants</strong> — giving members multiple reasons to stay.</p>
-    </div>
-  </div>
-
-  <div style="max-width:820px;margin:2.5rem auto 0;">
-    <h3 style="font-family:'Instrument Serif',serif;font-size:1.5rem;font-weight:400;margin-bottom:1rem;">The Spectrum of Belonging</h3>
-    <p>What brings people into a community varies deeply. At one extreme are <strong>grassroots communities</strong> — 100% built on choice. People come together around a shared interest; belonging is active and chosen. At the other extreme are communities you join almost <strong>by osmosis</strong> — like alumni networks, where graduating hands you a membership you didn't have to seek. In between sit communities rooted in <strong>shared identity</strong>: for example, being part of a minority group. You may not feel you "belong" anywhere in particular, but that identity creates a bridge — you recognise yourself in others, and a community that speaks to that experience can quickly feel like yours. This spectrum — from chosen belonging to given belonging, with identity as a middle ground — shapes how people show up and what they expect from the community.</p>
-  </div>
-</section>
-      <div class="continue-here-wrap">
-        <a href="#leaders" class="continue-here-card fade-in">
-          <div class="card-icon">👤</div>
-          <p class="continue-label">Continue here</p>
-          <p class="continue-title">02 — Leader Types</p>
-          <p class="continue-abstract">Four kinds of community leaders: accidental founders, stewards, mission carriers, and connectors.</p>
-        </a>
-      </div>
-      <nav class="section-nav" aria-label="Report sections">
-        <p class="section-nav-label">Explore other sections</p>
-        <div class="toc">
-          <a href="#home">Home</a>
-          <a href="#context">Context</a>
-          <a href="#landscape">Landscape</a>
-          <a href="#leaders">Leaders</a>
-          <a href="#findings">Findings</a>
-          <a href="#closing">Closing</a>
-        </div>
-      </nav>
-    </div>
-  </div>
-
-  <!-- VIEW: LEADERS -->
-  <div id="view-leaders" class="view-pane">
-    <div class="view-inner">
-      <section class="section-wide fade-in" id="leaders">
-  <div style="max-width:820px;margin:0 auto;">
-    <div class="section-number">02 — Leader Types</div>
-    <h2>Four kinds of community leaders</h2>
-    <p>
-      We didn't find "community managers." We found people who fell into a role that doesn't have a good name. Some built something from nothing; others inherited a living organism and had to keep it breathing. Here's what we found.
-    </p>
-  </div>
-
-  <div class="leader-grid" style="max-width:900px;margin:2rem auto;">
-    <div class="leader-card accidental">
-      <div class="card-emoji">🌱</div>
-      <h4>The Accidental Founder</h4>
-      <div class="subtitle">"I didn't think I was building a community when I started."</div>
-      <p>They started a Facebook group, organized one tour, cooked one meal — and suddenly people showed up and kept showing up. They learned community by doing it, not studying it. Their superpower is authenticity. Their kryptonite is burnout.</p>
-    </div>
-    <div class="leader-card steward">
-      <div class="card-emoji">🏛</div>
-      <h4>The Institutional Steward</h4>
-      <div class="subtitle">"The community existed before me and will exist after me."</div>
-      <p>They manage a community inside a larger organization — a university, an institute, a global network. They have resources but also constraints. They navigate bureaucracy to create belonging. Their superpower is infrastructure. Their kryptonite is distance from the members.</p>
-    </div>
-    <div class="leader-card mission">
-      <div class="card-emoji">🔥</div>
-      <h4>The Mission Carrier</h4>
-      <div class="subtitle">"You are a servant of the community, not the owner."</div>
-      <p>The community is inseparable from their personal calling — spiritual, social, moral. They attract people through conviction. Their greatest fear is arrogance; their greatest strength is that people come for the message and stay for the messenger. They worry about what happens when they leave.</p>
-    </div>
-    <div class="leader-card connector">
-      <div class="card-emoji">🔌</div>
-      <h4>The Connector-Operator</h4>
-      <div class="subtitle">"Being the most intense person in the room — constantly."</div>
-      <p>They focus on logistics, growth, and follow-up. They track attendance in spreadsheets, create WhatsApp groups for "active members," and personally message every attendee for feedback. Their superpower is execution. Their kryptonite is that the operational work eats the strategic work.</p>
-    </div>
-  </div>
-
-  <div style="max-width:820px;margin:0 auto;">
-    <div class="provocation">
-      Every leader we interviewed wore at least two of these hats. The question isn't which type you are — it's which hat is missing.
-    </div>
-  </div>
-</section>
-      <div class="continue-here-wrap">
-        <a href="#findings" class="continue-here-card fade-in">
-          <div class="card-icon">🔬</div>
-          <p class="continue-label">Continue here</p>
-          <p class="continue-title">03 — The 6 Pain Clusters</p>
-          <p class="continue-abstract">What keeps leaders up at night: six structural tensions in their own words.</p>
-        </a>
-      </div>
-      <nav class="section-nav" aria-label="Report sections">
-        <p class="section-nav-label">Explore other sections</p>
-        <div class="toc">
-          <a href="#home">Home</a>
-          <a href="#context">Context</a>
-          <a href="#landscape">Landscape</a>
-          <a href="#leaders">Leaders</a>
-          <a href="#findings">Findings</a>
-          <a href="#closing">Closing</a>
-        </div>
-      </nav>
-    </div>
-  </div>
-
-  <!-- VIEW: FINDINGS -->
-  <div id="view-findings" class="view-pane">
-    <div class="view-inner">
-      <section class="section fade-in" id="findings">
-  <div class="section-number">03 — The 6 Pain Clusters</div>
-  <h2>What keeps community leaders up at night</h2>
-  <p class="lead">
-    Across 13 very different communities, we kept hearing the same six tensions. These aren't just "problems to solve" — they're structural paradoxes that every community must navigate. Here they are, in the leaders' own words.
+  <p>
+    Add to that consumerism without limits, disconnection from nature, and the slow erosion of life in community — and you start to understand why so many people feel like they're running a race with no destination.
+  </p>
+  <p>
+    But here's what we're also seeing: something is shifting.
+  </p>
+  <p>
+    People are starting to look for alternatives. Craving quality over quantity. Choosing presence over productivity. They want to create — but not at any cost.
+  </p>
+  <p>
+    That's not everyone. But if it sounds like you, Majoriti is being built for you.
   </p>
 </section>
 
-<!-- CLUSTER 1 -->
-<div class="cluster fade-in" id="c1">
-  <div class="cluster-header">
-    <div class="cluster-emoji">🧩</div>
-    <div>
-      <span class="cluster-tag" style="background:var(--cluster1);">Cluster 1</span>
-      <h2>You want to burn out? Become a community leader.</h2>
-      <p class="cluster-subtitle">On leadership dependency, burnout, and the fragility of one-person operations</p>
-    </div>
-  </div>
-
-  <p>Almost every leader we spoke to described the same problem: the community runs on them. Because communities tend to be less structured than companies, they heavily depend on leaders to do most of the work — and leaders end up carrying far more than is sustainable.</p>
-
-  <div class="quote-block accent-1">
-    <p>"I would sit and have like an hour long chat with every new volunteer, tell them the story of Robin food, get to know their story, plug them into the system, coordinate expectations and find a way for them to fit in... I wore very many hats."</p>
-    <div class="attribution">— Founder, mission-driven social enterprise</div>
-  </div>
-
-  <p>One leader described doing food rescues at 6:00 AM before events, managing volunteers, running a restaurant, and handling everything in between. Another spoke about the "crazy overload" of trying to personally respond to every community member while keeping the community feel personal.</p>
-
-  <div class="quote-block accent-1">
-    <p>"Overload, crazy overload, crazy overload. As the volume goes up, it's very hard to keep it personal. In the beginning we were there all the time. Now I get there like once in 2-3 days. It's not enough... We are loaded with work."</p>
-    <div class="attribution">— Founder, product-led creator community</div>
-  </div>
-
-  <p>This isn't just exhaustion. It's structural fragility. When one person holds all the knowledge, all the relationships, all the context — the community becomes inseparable from that person's energy.</p>
-
-  <div class="pattern-box">
-    <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>Leadership burnout in communities isn't a personal failure — it's a <strong>structural inevitability</strong> when one person carries everything. Without clear role distribution, documentation, or systems to distribute responsibility, leaders find themselves "treading water" just to keep things alive. The more successful the community, the heavier the burden becomes.</p>
-  </div>
-
-  <div class="provocation">If the community collapses the moment you step away, you haven't built a community — you've built a dependency.</div>
-</div>
-
-<hr class="section-divider">
-
-<!-- CLUSTER 2 -->
-<div class="cluster fade-in" id="c2">
-  <div class="cluster-header">
-    <div class="cluster-emoji">🌱</div>
-    <div>
-      <span class="cluster-tag" style="background:var(--cluster2);">Cluster 2</span>
-      <h2>Some members want to do more — but there's nowhere for them to go</h2>
-      <p class="cluster-subtitle">On emergent leadership, informal core groups, and the invisible hierarchy of engagement</p>
-    </div>
-  </div>
-
-  <p>In almost every community we studied, a small group of members naturally stepped up. They wanted to contribute, lead workshops, take on projects. This is the beautiful reality of communities — people <em>want</em> to help.</p>
-
-  <div class="quote-block accent-2">
-    <p>"Right now I have about three students who take initiative. One of them is at this point a co-leader... That's what I want to see for everyone. I want it to be a communal creation."</p>
-    <div class="attribution">— Founder, philosophy-driven student community</div>
-  </div>
-
-  <p>Another described how their small core group of active members emerged entirely organically — people talking to each other without the founders, creating connections on their own. Members would come up and say they knew something and would like to lead a workshop.</p>
-
-  <p>But most communities didn't have a way to recognize, formalize, or support this energy.</p>
-
-  <div class="quote-block accent-2">
-    <span class="lang-tag">Original — Spanish</span>
-    <p>"Lo que más me cuesta a mí es intentar armar una estructura... Tener que armar una mesa con voluntarios. Pero a la vez todavía no conozco tanto a los miembros como para decir, bueno, vení y lo hagamos juntos."</p>
-    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">What's hardest for me is trying to build a structure... Having to build a team with volunteers. But I still don't know the members well enough to say, come, let's do this together.</p>
-    <div class="attribution">— Leader, identity-based Latin American community</div>
-  </div>
-
-  <p>One leader had a term for these people: "bangers" — but none of the bangers knew they were bangers. The roles existed in practice but not in name or structure.</p>
-
-  <div class="pattern-box">
-    <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>Emergent leadership is happening everywhere — but it's <strong>invisible, informal, and fragile</strong>. The most engaged members don't have a pathway from "participant" to "contributor" to "co-leader." Without tooling or visibility, this energy either burns out or gets absorbed by the founder, who becomes the bottleneck once again.</p>
-  </div>
-
-  <div class="provocation">If you're manually activating every single leader in your community, you don't have a system — you have a heroic effort that can't scale.</div>
-</div>
-
-<hr class="section-divider">
-
-<!-- CLUSTER 3 -->
-<div class="cluster fade-in" id="c3">
-  <div class="cluster-header">
-    <div class="cluster-emoji">🚧</div>
-    <div>
-      <span class="cluster-tag" style="background:var(--cluster3);">Cluster 3</span>
-      <h2>We know what we could do — we just can't do it</h2>
-      <p class="cluster-subtitle">On missed potential, stalled projects, and the gap between vision and capacity</p>
-    </div>
-  </div>
-
-  <p>Leaders described ambitious projects that never got off the ground. A scientific community wanted to publish a book documenting their research — members were enthusiastic, the content was there, but the project stalled and never succeeded.</p>
-
-  <div class="quote-block accent-3">
-    <p>"We talk about doing it for years, but it never happens."</p>
-    <div class="attribution">— Leader, knowledge-driven citizen science community</div>
-  </div>
-
-  <p>The bottleneck wasn't desire. It wasn't even funding in most cases. It was <em>time, coordination, and bandwidth</em>.</p>
-
-  <div class="quote-block accent-3">
-    <span class="lang-tag">Original — Spanish</span>
-    <p>"Lo que queremos para el 2026 es no ser eventos aislados, sino generar programas."</p>
-    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">What we want for 2026 is to stop being isolated events and start creating programs.</p>
-    <div class="attribution">— Leader, identity-based Latin American community</div>
-  </div>
-
-  <p>This leader articulated what many felt: the desire to move from one-off events to sustained programs, from transactional moments to relational depth. But without the infrastructure to make that leap, communities stay stuck in reactive mode — responding to immediate needs rather than building toward a vision.</p>
-
-  <div class="pattern-box">
-    <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>The most value-creating work in communities — <strong>relationship maintenance, emotional labor, one-on-one outreach</strong> — is invisible, unrecognized, and unscalable. Yet it's essential for survival. Communities want to move from events to programs, from transactional to relational, but they don't have the infrastructure to make that leap.</p>
-  </div>
-
-  <div class="provocation">Ambition without infrastructure isn't vision — it's burnout waiting to happen.</div>
-</div>
-
-<hr class="section-divider">
-
-<!-- CLUSTER 4 -->
-<div class="cluster fade-in" id="c4">
-  <div class="cluster-header">
-    <div class="cluster-emoji">📢</div>
-    <div>
-      <span class="cluster-tag" style="background:var(--cluster4);">Cluster 4</span>
-      <h2>WhatsApp is king</h2>
-      <p class="cluster-subtitle">On the default communication stack, fragmented channels, and tools built for something else</p>
-    </div>
-  </div>
-
-  <p>With one exception (a startup community using Discord), every single community we studied relied heavily on WhatsApp as their primary coordination tool.</p>
-
-  <div class="quote-block accent-4">
-    <p>"We tried Slack… nobody was engaged… email is not an option… so we opened a WhatsApp group."</p>
-    <div class="attribution">— Leader, institution-anchored professional community</div>
-  </div>
-
-  <p>Why? Not because WhatsApp is great for community management. Because it's universal, it's simple, and nothing better exists that people actually use.</p>
-
-  <div class="quote-block accent-4">
-    <p>"The infrastructure was very basic. It's just WhatsApp for coordination, Google Sheets for timetables and the CRM and everything. Sure, maybe we could have developed some custom tool, but the more custom it is, the more friction in getting it in people's hands."</p>
-    <div class="attribution">— Founder, mission-driven social enterprise</div>
-  </div>
-
-  <p>Communities need low friction — but what are the costs of using tools that weren't built for them? WhatsApp doesn't hold memory. It doesn't track roles or progression. It can't distinguish between a lurker and a core contributor. It's a communication tool being forced to be a community tool.</p>
-
-  <div class="pattern-box">
-    <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>The tool you use to talk to your community <strong>shapes the kind of community you can build</strong>. Broadcast-only channels create dependency on the founder. One-on-one nudging creates bottlenecks. WhatsApp groups create noise but not structure. Leaders want dialogue, not just announcements — but the tools they have make dialogue nearly impossible at scale.</p>
-  </div>
-
-  <div class="provocation">The tool you use to talk to your community shapes the kind of community you can build.</div>
-</div>
-
-<hr class="section-divider">
-
-<!-- CLUSTER 5 -->
-<div class="cluster fade-in" id="c5">
-  <div class="cluster-header">
-    <div class="cluster-emoji">🧭</div>
-    <div>
-      <span class="cluster-tag" style="background:var(--cluster5);">Cluster 5</span>
-      <h2>We know what we do — but not how to say it</h2>
-      <p class="cluster-subtitle">On the lack of a unifying story, identity confusion, and the naming problem</p>
-    </div>
-  </div>
-
-  <p>Multiple leaders told us their members wouldn't even describe themselves as "part of a community." They come to events, they value what they receive — but the sense of belonging hasn't crystallized into an identity.</p>
-
-  <div class="quote-block accent-5">
-    <span class="lang-tag">Original — Spanish</span>
-    <p>"Yo creo que hoy en día los miembros no se sienten parte de una comunidad aún, sino que dirían que me aporta herramientas o espacios, pero así como más aislados."</p>
-    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">I think today the members don't feel like they're part of a community yet — they'd say it gives them tools or spaces, but in a more isolated way.</p>
-    <div class="attribution">— Leader, identity-based Latin American community</div>
-  </div>
-
-  <p>There's a disconnect between what leaders envision and what members experience. Leaders see a community; members see useful events. Leaders have a story in their heads; members don't know they're part of one.</p>
-
-  <p>This disconnect becomes even more problematic when trying to bring new people into leadership positions. The community's DNA — its culture, values, and way of doing things — lives entirely in the founder's head.</p>
-
-  <div class="quote-block accent-5">
-    <p>"It's not just transferring a role — it's transferring the soul, a vibe, a way of doing things and of course, established relationships with large amounts of people."</p>
-    <div class="attribution">— Founder, mission-driven social enterprise</div>
-  </div>
-
-  <p>When everything that defines the community is tacit knowledge, onboarding becomes nearly impossible. How do you hand over something you can't articulate?</p>
-
-  <div class="pattern-box">
-    <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>The communities with the strongest identities were those with <strong>a clear aesthetic, language, or ritual</strong> — not just a clear mission. A social enterprise had puns and a playful visual style. A wellness community had "challenges" as a branded concept. A citizen science group had the organism itself as a metaphor for how they organize. Identity isn't just a mission statement. It's how a community <em>feels</em> from the inside.</p>
-  </div>
-
-  <div class="provocation">If your members can't explain your community in one sentence to a friend, you don't have a story yet.</div>
-</div>
-
-<hr class="section-divider">
-
-<!-- CLUSTER 6 -->
-<div class="cluster fade-in" id="c6">
-  <div class="cluster-header">
-    <div class="cluster-emoji">🔁</div>
-    <div>
-      <span class="cluster-tag" style="background:var(--cluster6);">Cluster 6</span>
-      <h2>They came once — how do we make them come back?</h2>
-      <p class="cluster-subtitle">On recurring participation, lurkers, the commitment curve, and the async problem</p>
-    </div>
-  </div>
-
-  <p>This is the most operationally painful cluster. Leaders described the anxiety of planning events and not knowing who will show up — and the deeper existential question of whether one-time attendees are "members" at all.</p>
-
-  <div class="quote-block accent-6">
-    <span class="lang-tag">Original — Spanish</span>
-    <p>"Si no hacía la convocatoria uno a uno, había cero participantes inscriptos."</p>
-    <p style="font-family:'Montserrat';font-size:0.88rem;font-style:normal;color:#666;">If I didn't do outreach one-on-one, there were zero people signed up.</p>
-    <div class="attribution">— Leader, identity-based Latin American community</div>
-  </div>
-
-  <p>The manual labor of activating people — sending individual messages, personal reminders, one-on-one nudges — becomes the only way to get anyone to show up. But this doesn't scale, and it's exhausting.</p>
-
-  <p>Several leaders pointed to the tension between in-person depth and asynchronous breadth. In-person events create magic but exclude people who can't attend. Online channels create access but rarely depth. The best communities need both — but building both is twice the work.</p>
-
-  <div class="quote-block accent-6">
-    <p>"How do we help people understand that their absence is noticed and their showing up is appreciated?"</p>
-    <div class="attribution">— Founder, philosophy-driven student community</div>
-  </div>
-
-  <p>One community tracks attendance in a spreadsheet and graduates repeat attendees into a VIP WhatsApp group. Another set fixed meeting times and accepted they'd lose some interested people — because trying to accommodate everyone meant accommodating no one.</p>
-
-  <div class="pattern-box">
-    <div class="pattern-label">🔍 Pattern we noticed</div>
-    <p>When the community's value proposition isn't clear — when members don't understand what they're getting or why they should keep coming back — leaders resort to <strong>manual activation instead of organic pull</strong>. This is a community-market-fit problem. Without a clear, consistent utility that members can articulate, recurring participation becomes dependent on the leader's hustle rather than the community's inherent value.</p>
-  </div>
-
-  <div class="provocation">If you can't articulate what's the value of your community, can you expect members to do so?</div>
-</div>
-      <div class="continue-here-wrap">
-        <a href="#closing" class="continue-here-card fade-in">
-          <div class="card-icon">✦</div>
-          <p class="continue-label">Continue here</p>
-          <p class="continue-title">04 — Takeaways</p>
-          <p class="continue-abstract">Five things we'll remember from this research.</p>
-        </a>
-      </div>
-      <nav class="section-nav" aria-label="Report sections">
-        <p class="section-nav-label">Explore other sections</p>
-        <div class="toc">
-          <a href="#home">Home</a>
-          <a href="#context">Context</a>
-          <a href="#landscape">Landscape</a>
-          <a href="#leaders">Leaders</a>
-          <a href="#findings">Findings</a>
-          <a href="#closing">Closing</a>
-        </div>
-      </nav>
-    </div>
-  </div>
-
-  <!-- VIEW: CLOSING -->
-  <div id="view-closing" class="view-pane">
-    <div class="view-inner">
-      <section class="closing fade-in" id="closing">
-  <div class="section-number">04 — What we take from here</div>
-  <h2>Five things we'll remember</h2>
-
-  <div class="takeaway-list">
-    <div class="takeaway-item">
-      <div class="takeaway-number">1</div>
-      <p><strong>Most communities emerge organically — then hit a wall when they need structure.</strong> Many communities in our research didn't start with an intentional "community plan." They emerged around a shared need or passion. The challenge isn't starting communities. It's keeping them alive past the founder's energy.</p>
-    </div>
-    <div class="takeaway-item">
-      <div class="takeaway-number">2</div>
-      <p><strong>Community leaders are intuitively choosing tools that aren't designed for their needs.</strong> The proof is in the pudding: when communities grow or when leaders need to step away, the limitations become painfully clear. While dedicated community tools exist, they haven't achieved widespread adoption. There's a reason WhatsApp is king — it doesn't work the best, but it works good enough to keep communities alive.</p>
-    </div>
-    <div class="takeaway-item">
-      <div class="takeaway-number">3</div>
-      <p><strong>Leaders overestimate how much others want to lead.</strong> Expecting equal participation from all members is naive and anti-natural. The healthiest communities design a spectrum of engagement — from passive members to co-leaders — and make every level feel valued.</p>
-    </div>
-    <div class="takeaway-item">
-      <div class="takeaway-number">4</div>
-      <p><strong>Communities struggle when their value isn't clear.</strong> When members can't articulate why they come back — when the utility of the community isn't obvious — recurring participation becomes dependent on the leader's manual effort rather than organic pull. This is a community-market-fit problem: if the leader can't clearly explain what their community offers, members won't be able to either.</p>
-    </div>
-    <div class="takeaway-item">
-      <div class="takeaway-number">5</div>
-      <p><strong>A community's value exists even for those who never show up.</strong> It's natural that only a small percentage of members will engage actively. But passive members are still members, and they can become active at any point. The mere knowledge that a community exists — that there <em>are</em> people who care about the same things — has value. Building for the lurkers isn't a consolation prize. They are actually the foundation of most strong communities.</p>
-    </div>
-  </div>
-
-  <p style="color:var(--muted);font-size:0.95rem;max-width:820px;margin:0;text-align:left;">
-    This is a living document. The research continues with member interviews and a deeper analysis of community structures. If you're a leader who sees yourself in these pages — we'd love to hear from you.
+<!-- 3. THE COMMUNITY PARADOX — INSIGHT REPORT -->
+<section class="cta-section">
+  <h2>We went deep. Here's what we found.</h2>
+  <p class="sub-heading">Communities are everywhere — and somehow, loneliness has never been higher. How is that possible?</p>
+  <p>
+    In our latest insight report, The Community Paradox, we explore why the rise of communities hasn't translated into genuine belonging — and what it will actually take to change that. It's our most honest and researched piece of thinking yet.
   </p>
+  <a href="report.html" class="btn-primary">Read the Report →</a>
 </section>
-      <div class="continue-here-wrap">
-        <a href="#newsletter" class="continue-here-card fade-in">
-          <div class="card-icon">✉️</div>
-          <p class="continue-label">Stay in the loop</p>
-          <p class="continue-title">Subscribe to our newsletter</p>
-          <p class="continue-abstract">Receive more insights and tools for community building.</p>
-        </a>
-      </div>
-      <nav class="section-nav" aria-label="Report sections">
-        <p class="section-nav-label">Explore other sections</p>
-        <div class="toc">
-          <a href="#home">Home</a>
-          <a href="#context">Context</a>
-          <a href="#landscape">Landscape</a>
-          <a href="#leaders">Leaders</a>
-          <a href="#findings">Findings</a>
-          <a href="#closing">Closing</a>
-        </div>
-      </nav>
-    </div>
+
+<!-- 4. OUR PROJECTS -->
+<section class="section">
+  <h2>What we're building</h2>
+  <p class="section-intro">Three projects. One direction: making collective work actually work.</p>
+
+  <div class="card-grid">
+    <a href="#" class="project-card">
+      <div class="card-icon">🧠</div>
+      <h3>Human-Centered AI Education</h3>
+      <p>AI is reshaping how we learn, work, and create. But most of the conversation skips the human part. We're developing education frameworks that put people — their curiosity, their wellbeing, their agency — at the center of that shift.</p>
+      <span class="card-cta">Coming soon / Learn more →</span>
+    </a>
+    <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" class="project-card" target="_blank" rel="noopener noreferrer">
+      <div class="card-icon">🔗</div>
+      <h3>The Communiti</h3>
+      <p>Tools, resources, and a network for people who take community seriously. Whether you're building one, leading one, or trying to find yours — The Communiti is where the practice lives.</p>
+      <span class="card-cta">Join The Communiti →</span>
+    </a>
+    <a href="#" class="project-card">
+      <div class="card-icon">✦</div>
+      <h3>Majoriti Originals</h3>
+      <p>Our collective R&D lab, where we design and test infrastructure for community-driven work. Part research, part experiment, entirely open to what we find.</p>
+      <span class="card-cta">Explore our work →</span>
+    </a>
   </div>
-</div>
+</section>
+
+<!-- 5. STAY CONNECTED -->
+<section class="section">
+  <h2>Let's stay in touch.</h2>
+  <p class="section-intro">We're just getting started — and we'd love to have you along for the ride.</p>
+
+  <div class="connect-grid">
+    <a href="https://www.instagram.com/majoriti.world/" class="connect-card" target="_blank" rel="noopener noreferrer">
+      <h3>Follow us on Instagram</h3>
+      <p>Behind-the-scenes thinking, ideas we're exploring, and the occasional thing that made us stop and reflect.</p>
+      <span class="handle">@majoriti.world</span>
+    </a>
+    <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" class="connect-card" target="_blank" rel="noopener noreferrer">
+      <h3>Join The Communiti on WhatsApp</h3>
+      <p>A living, breathing group for people who believe in the power of collective work. No noise — just substance.</p>
+      <span class="handle">Join the group</span>
+    </a>
+    <a href="mailto:hello@majoriti.world" class="connect-card">
+      <h3>Send us an email</h3>
+      <p>Have something to say, ask, or propose? We read everything.</p>
+      <span class="handle">hello@majoriti.world</span>
+    </a>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <p>The Community Paradox Insight Report © 2026 MAJORITI</p>
-  <div class="footer-links" style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:1rem;font-size:0.85rem;justify-content:center;">
-    <a href="https://www.instagram.com/majoriti.world/" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://www.linkedin.com/company/majoritiworld/?viewAsMember=true" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" target="_blank" rel="noopener noreferrer">WhatsApp Community</a>
-  </div>
+  <p>Majoriti Lab · Tel Aviv · Building infrastructure for the way people actually work — together.</p>
 </footer>
 
+<script type="module" src="/src/main.jsx"></script>
 <script>
 (function() {
-  const VIEW_IDS = ['home', 'context', 'landscape', 'leaders', 'findings', 'closing'];
-  const FINDINGS_SUB = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
-
-  function getViewIdFromHash() {
-    const hash = (window.location.hash || '#').slice(1).toLowerCase();
-    if (VIEW_IDS.includes(hash)) return hash;
-    if (FINDINGS_SUB.includes(hash)) return 'findings';
-    return 'home';
-  }
-
-  function showView(viewId) {
-    const panes = document.querySelectorAll('#report-views .view-pane');
-    const wasActive = document.querySelector('#report-views .view-pane.active');
-    panes.forEach(pane => {
-      pane.classList.remove('active');
-      if (pane.id === 'view-' + viewId) pane.classList.add('active');
-    });
-    const switched = !wasActive || wasActive.id !== 'view-' + viewId;
-    if (switched) window.scrollTo(0, 0);
-    // If hash is a findings sub-anchor, scroll to it after view is visible
-    const hash = (window.location.hash || '').slice(1).toLowerCase();
-    if (FINDINGS_SUB.includes(hash)) {
-      const el = document.getElementById(hash);
-      if (el) {
-        requestAnimationFrame(() => {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      }
-    }
-    // Reveal fade-in elements in active pane
-    const activePane = document.getElementById('view-' + viewId);
-    if (activePane) {
-      activePane.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
-    }
-  }
-
-  function applyRoute() {
-    const viewId = getViewIdFromHash();
-    showView(viewId);
-  }
-
-  window.addEventListener('hashchange', applyRoute);
-  window.addEventListener('load', applyRoute);
-
-  // Intercept in-page hash links: switch view instead of default scroll
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const href = (this.getAttribute('href') || '').trim();
-      if (href === '#') return;
-      const id = href.slice(1).toLowerCase();
-      const isView = VIEW_IDS.includes(id) || FINDINGS_SUB.includes(id);
-      if (isView) {
-        e.preventDefault();
-        window.location.hash = id;
-      }
-      document.getElementById('nav').classList.remove('open');
-      const toggle = document.getElementById('nav-toggle');
-      if (toggle) toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  // Hamburger menu toggle (mobile)
   const nav = document.getElementById('nav');
   const navToggle = document.getElementById('nav-toggle');
   if (nav && navToggle) {
@@ -1514,15 +568,6 @@ p.lead {
     });
   }
 })();
-
-// Intersection Observer for fade-in (elements in visible pane)
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, observerOptions);
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
 </body>

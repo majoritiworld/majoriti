@@ -1,12 +1,10 @@
 import { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 
-const MIN_HEIGHT = 400
 const NODE_COLOR = '#c084fc'
 const LINK_COLOR = 'white'
 const LINK_OPACITY = 0.15
 const GRAPH_OPACITY = 0.3
-const VIEWPORT_MARGIN = '2rem'
 const FLOAT_AMPLITUDE = 5
 const FLOAT_SPEED = 0.0008
 
@@ -93,8 +91,8 @@ export default function NetworkGraph() {
 
     const nodes = generateNodes().map((d) => ({
       ...d,
-      x: width / 2 + (Math.random() - 0.5) * width * 0.8,
-      y: height / 2 + (Math.random() - 0.5) * height * 0.8,
+      x: width / 2 + (Math.random() - 0.5) * width * 1.0,
+      y: height / 2 + (Math.random() - 0.5) * height * 1.0,
     }))
     const links = generateLinks(nodes)
 
@@ -146,7 +144,7 @@ export default function NetworkGraph() {
         d3.forceLink(links).id((d) => d.id).distance(80)
       )
       .force('charge', d3.forceManyBody().strength(-120))
-      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('center', d3.forceCenter(width / 2, height / 2).strength(0.05))
       .force(
         'collision',
         d3.forceCollide().radius((d) => d.radius + 4)
@@ -186,7 +184,7 @@ export default function NetworkGraph() {
       const w = container.clientWidth
       const h = container.clientHeight
       if (w <= 0 || h <= 0) return
-      simulation.force('center', d3.forceCenter(w / 2, h / 2))
+      simulation.force('center', d3.forceCenter(w / 2, h / 2).strength(0.05))
       svg.attr('width', w).attr('height', h)
       simulation.alpha(0.3).restart()
     })
@@ -204,15 +202,13 @@ export default function NetworkGraph() {
     <div
       ref={containerRef}
       style={{
-        position: 'absolute',
-        left: `calc(50% - 50vw + ${VIEWPORT_MARGIN})`,
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: `calc(100vw - 2 * ${VIEWPORT_MARGIN})`,
-        height: 'calc(100vh - 6rem)',
-        minHeight: MIN_HEIGHT,
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        width: '100vw',
+        height: '100vh',
         backgroundColor: 'transparent',
-        pointerEvents: 'auto',
+        pointerEvents: 'none',
       }}
     >
       <svg

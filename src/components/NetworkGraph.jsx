@@ -1,12 +1,10 @@
 import { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 
-const MIN_HEIGHT = 400
 const NODE_COLOR = '#c084fc'
 const LINK_COLOR = 'white'
 const LINK_OPACITY = 0.15
-const GRAPH_OPACITY = 0.3
-const VIEWPORT_MARGIN = '2rem'
+const GRAPH_OPACITY = 0.5
 const FLOAT_AMPLITUDE = 5
 const FLOAT_SPEED = 0.0008
 
@@ -204,13 +202,11 @@ export default function NetworkGraph() {
     <div
       ref={containerRef}
       style={{
-        position: 'absolute',
-        left: `calc(50% - 50vw + ${VIEWPORT_MARGIN})`,
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: `calc(100vw - 2 * ${VIEWPORT_MARGIN})`,
-        height: 'calc(100vh - 6rem)',
-        minHeight: MIN_HEIGHT,
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        width: '100vw',
+        height: '100vh',
         backgroundColor: 'transparent',
         pointerEvents: 'auto',
       }}

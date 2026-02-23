@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Majoriti — R&D Lab for Collective Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+@font-face {
+  font-family: 'Majoriti';
+  src: url('fonts/majoriti.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Garet */
+@font-face {
+  font-family: 'Garet';
+  src: url('fonts/Garet Font/Garet-Book.woff2') format('woff2'),
+       url('fonts/Garet Font/Garet-Book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Garet';
+  src: url('fonts/Garet Font/Garet-Heavy.woff2') format('woff2'),
+       url('fonts/Garet Font/Garet-Heavy.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Restora Neue */
+@font-face {
+  font-family: 'Restora Neue';
+  src: url('fonts/Restora Neue Font/Fontspring-DEMO-restoraneue-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Restora Neue';
+  src: url('fonts/Restora Neue Font/Fontspring-DEMO-restoraneue-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Restora Neue';
+  src: url('fonts/Restora Neue Font/Fontspring-DEMO-restoraneue-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --ink: #1a1a18;
+  --paper: #f5f0e8;
+  --accent: #94a200;
+  --accent2: #C9A0CA;
+  --muted: #8a8578;
+  --light-line: #d9d3c7;
+  --quote-bg: #ece7db;
+  --card-bg: #faf7f1;
+  --mobile-gutter: 1.5rem;
+  --nav-height: 3.25rem;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 17px;
+  scroll-padding-top: var(--nav-height);
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: 'Garet', 'Montserrat', sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-content {
+  padding-left: max(var(--mobile-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--mobile-gutter), env(safe-area-inset-right));
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* NAVIGATION */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(245,240,232,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--light-line);
+  padding: 0.6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Majoriti', 'Restora Neue', 'Instrument Serif', serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--ink); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--ink);
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem 7rem;
+  position: relative;
+  overflow: visible;
+  background: #284032;
+  color: var(--paper);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 120%;
+  height: 140%;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(200,75,49,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(45,106,79,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(91,74,138,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-family: 'Restora Neue', 'Instrument Serif', serif;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  max-width: 1040px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-lead {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--paper);
+  max-width: 740px;
+  margin-top: 2rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(245, 240, 232, 0.78);
+  max-width: 740px;
+  margin-top: 1rem;
+  line-height: 1.75;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-accent {
+  color: var(--accent);
+}
+
+.hero-bridge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50vh;
+  max-height: none;
+  object-fit: cover;
+  object-position: bottom center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* SECTIONS */
+.section {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.section h2 {
+  font-family: 'Restora Neue', 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.section h3 {
+  font-family: 'Restora Neue', 'Instrument Serif', serif;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.section p {
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.section .lead {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: #444;
+}
+
+.section-intro {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.section-intro a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.section-intro a:hover {
+  text-decoration: underline;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+/* CARDS */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+/* Only the card grid: match cta-section width (1040px); section text stays 940px */
+@media (min-width: 1100px) {
+  .section .card-grid {
+    max-width: 1040px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+  }
+  .section .connect-grid {
+    max-width: 1040px;
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+  }
+}
+
+@media (max-width: 800px) {
+  .card-grid { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--light-line);
+  border-radius: 12px;
+  padding: 1.8rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.card .card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.card h3 {
+  font-family: 'Restora Neue', 'Instrument Serif', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.card-grid .card-span-full {
+  grid-column: 1 / -1;
+}
+
+/* PROJECT CARDS (can be links) */
+.project-card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--light-line);
+  border-radius: 12px;
+  padding: 1.8rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  color: var(--ink);
+}
+
+.project-card .card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.project-card h3 {
+  font-family: 'Restora Neue', 'Instrument Serif', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.project-card p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.project-card .card-cta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+/* CTA SECTION */
+.cta-section {
+  max-width: 1040px;
+  margin: 3rem auto;
+  padding: 6rem 3.5rem;
+  text-align: center;
+  position: relative;
+  background: #284032;
+  color: var(--paper);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(200,75,49,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(45,106,79,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(91,74,138,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cta-section h2,
+.cta-section p {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section h2 {
+  font-family: 'Restora Neue', 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.cta-section .sub-heading {
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  color: rgba(245,240,232,0.95);
+}
+
+.cta-section .section-label {
+  color: rgba(245, 240, 232, 0.7);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section .btn-primary {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glance stats (report-style cards) in CTA */
+.cta-section .glance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2rem 0 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section .glance-stat {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+}
+
+.cta-section .glance-stat .number {
+  font-family: 'Restora Neue', 'Instrument Serif', serif;
+  font-size: 1.5rem;
+  color: var(--paper);
+  line-height: 1;
+}
+
+.cta-section .glance-stat .number .lucide-stat-icon {
+  display: inline-block;
+  vertical-align: -0.2em;
+  margin-right: 0.15em;
+  font-size: 1em;
+}
+.cta-section .glance-stat .number .lucide-stat-icon svg {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  stroke: currentColor;
+}
+
+.card-icon i[data-lucide] { display: inline-block; line-height: 1; }
+.card-icon svg { width: 1em; height: 1em; stroke: currentColor; }
+
+.cta-section .glance-stat .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(245, 240, 232, 0.7);
+  margin-top: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 650px) {
+  .cta-section .glance-grid { grid-template-columns: 1fr; }
+  .cta-section .glance-stat .number { font-size: 1.25rem; }
+  .cta-section .glance-stat .number .lucide-stat-icon svg { width: 1.25rem !important; height: 1.25rem !important; }
+}
+
+.btn-primary {
+  font-family: 'JetBrains Mono', monospace;
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  background: var(--accent);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: #7d8c00;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* STAY CONNECTED CARDS (dark-card style) */
+.connect-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+@media (max-width: 800px) {
+  .connect-grid { grid-template-columns: 1fr; }
+}
+
+.connect-card {
+  display: block;
+  background: #1a1a18;
+  border: none;
+  border-radius: 12px;
+  padding: 2rem 1.8rem;
+  text-decoration: none;
+  color: var(--paper);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.connect-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  color: var(--paper);
+}
+
+.connect-card h3 {
+  font-family: 'Restora Neue', 'Instrument Serif', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: rgba(245, 240, 232, 0.95);
+}
+
+.connect-card p {
+  font-size: 0.88rem;
+  color: rgba(245, 240, 232, 0.85);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.connect-card .handle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--accent2);
+}
+
+.connect-card-icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 0.8rem;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--light-line);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* RESPONSIVE */
+@media (max-width: 500px) {
+  html { font-size: 15px; }
+  .hero { padding: 3rem var(--mobile-gutter); }
+  .section { padding: 3rem var(--mobile-gutter); }
+  .cta-section { padding: 4rem var(--mobile-gutter); }
+  .nav { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(245,240,232,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-line);
+    padding: 1rem var(--mobile-gutter) 1.5rem;
+    gap: 0;
+  }
+  .nav.open .nav-links {
+    display: flex;
+  }
+  .nav.open .nav-links li {
+    border-bottom: 1px solid var(--light-line);
+  }
+  .nav.open .nav-links li:last-child { border-bottom: none; }
+  .nav.open .nav-links a {
+    display: block;
+    padding: 0.85rem 0;
+    font-size: 0.8rem;
+  }
+  .footer { padding-left: var(--mobile-gutter); padding-right: var(--mobile-gutter); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">Majoriti</a>
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <ul class="nav-links">
+    <li><a href="ai-education.html">AI Education</a></li>
+    <li><a href="report.html">Read the Report</a></li>
+    <li><a href="about.html">About us</a></li>
+  </ul>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div id="hero-bg" style="position:absolute;inset:0;z-index:0;pointer-events:none;" aria-hidden="true"></div>
+  <h1>Welcome To <span class="hero-accent">Majoriti's</span> World</h1>
+  <p class="hero-lead">
+    Majoriti is an R&D Lab based in Tel Aviv, researching and building infrastructure for collective work.
+  </p>
+  <p class="hero-sub">
+    We're driven by the belief that community is the antidote to an era of burnout and polarization… but for them to become a relevant force in society, we must take them seriously.
+  </p>
+  <picture>
+    <source srcset="images/bridge_mobile.png" media="(max-width: 640px)" />
+    <img src="images/bridge.png" alt="" class="hero-bridge" />
+  </picture>
+</section>
+
+<main class="site-content">
+<!-- 2. OUR CURRENT ERA -->
+<section class="section">
+  <h2>Something is broken. And we all feel it.</h2>
+  <p class="section-intro">
+    We've spoken to hundreds of people — different ages, different countries, different professions. And one feeling keeps surfacing: <strong>people are tired. Very tired.</strong>
+  </p>
+  <p class="section-intro">
+    Which is strange. We live in an era where almost everything is within reach, instantly accessible. So why are we running on empty?
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon"><i data-lucide="smartphone"></i></div>
+      <h3>The Attention Trap</h3>
+      <p>Whenever we need a break, we scroll. But endless feeds don't restore anything, they consume what's left. What we call rest is quietly draining the little energy we have left.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><i data-lucide="globe"></i></div>
+      <h3>9-5 No More</h3>
+      <p>Work no longer stays at work because it lives in the same device we use for everything else. The line between life and labor has basically disappeared.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><i data-lucide="zap"></i></div>
+      <h3>The Productivity Paradox</h3>
+      <p>AI makes us more productive? No question. But it also makes it harder to know when enough is enough. More capacity means more output means more pressure. The finish line keeps moving.</p>
+    </div>
+  </div>
+
+  <p>
+    Add to that consumerism without limits, disconnection from nature, and the slow erosion of life in community... and you start to understand why so many people feel like they're running a race with no destination.
+  </p>
+  <h2>But here's what we're also seeing: something is shifting.</h2>
+  <p>
+    People are starting to look for alternatives. They're craving quality over quantity. They're looking to slow down and be more present. These people don't want to run away, they are eager to create... but not at any cost.
+  </p>
+  <p>
+    <strong>That's not everyone. But if it sounds like you, Majoriti is being built for you.</strong>
+  </p>
+</section>
+
+<!-- 3. THE COMMUNITY PARADOX — INSIGHT REPORT -->
+<section class="cta-section">
+  <p class="section-label"><em>The Community Paradox</em> Insight Report</p>
+  <h2>We went deep. Here's what we found.</h2>
+  <p class="sub-heading">In our latest insight report, <em>The Community Paradox</em>, we explore why the rise of communities hasn't translated into genuine belonging — and what it will actually take to change that. It's our most honest and researched piece of thinking yet.</p>
+  <div class="glance-grid">
+    <div class="glance-stat">
+      <div class="number"><i data-lucide="user" class="lucide-stat-icon"></i> 13</div>
+      <div class="label">Leaders</div>
+    </div>
+    <div class="glance-stat">
+      <div class="number"><i data-lucide="globe" class="lucide-stat-icon"></i> 5</div>
+      <div class="label">Countries</div>
+    </div>
+    <div class="glance-stat">
+      <div class="number"><i data-lucide="puzzle" class="lucide-stat-icon"></i> 6</div>
+      <div class="label">Key Insights</div>
+    </div>
+  </div>
+  <a href="report.html" class="btn-primary">Read the Report →</a>
+</section>
+
+<!-- 4. OUR PROJECTS -->
+<section class="section">
+  <h2>What we're building</h2>
+  <p class="section-intro">Four parallel paths. One direction: building infrastructure for collective work.</p>
+
+  <div class="card-grid">
+    <a href="ai-education.html" class="project-card">
+      <div class="card-icon"><i data-lucide="brain"></i></div>
+      <h3>Human-Centered AI Education</h3>
+      <p>We're building educational frameworks that put people at the forefront of this change.</p>
+      <span class="card-cta">Learn more →</span>
+    </a>
+    <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" class="project-card" target="_blank" rel="noopener noreferrer">
+      <div class="card-icon"><i data-lucide="link"></i></div>
+      <h3>The Communiti</h3>
+      <p>Tools, knowledge, and a space for people who seriously care about community.</p>
+      <span class="card-cta">Join The Communiti →</span>
+    </a>
+    <a href="#" class="project-card">
+      <div class="card-icon"><i data-lucide="sparkles"></i></div>
+      <h3>Majoriti Originals</h3>
+      <p>Our shared R&D space, where we're building infrastructure for community-driven work.</p>
+      <span class="card-cta">Explore our work →</span>
+    </a>
+    <a href="about.html" class="project-card">
+      <div class="card-icon"><i data-lucide="target"></i></div>
+      <h3>About us</h3>
+      <p>Learn more about Majoriti, the lab behind this insight report.</p>
+      <span class="card-cta">Learn more →</span>
+    </a>
+  </div>
+</section>
+
+<!-- 5. STAY CONNECTED -->
+<section class="section">
+  <h2>Let's stay in touch.</h2>
+  <p class="section-intro">We're just getting started — and we'd love to have you along for the ride.</p>
+
+  <div class="connect-grid">
+    <a href="https://www.instagram.com/majoriti.world/" class="connect-card" target="_blank" rel="noopener noreferrer">
+      <img class="connect-card-icon" src="images/favicons/instagram.png.webp" alt="Instagram" width="32" height="32">
+      <h3>Follow us on Instagram</h3>
+      <p>Behind-the-scenes thinking, ideas we're exploring, and the occasional thing that made us stop and reflect.</p>
+      <span class="handle">@majoriti.world</span>
+    </a>
+    <a href="https://chat.whatsapp.com/EDdYJh9YXZ08mimrB897iE?mode=gi_t" class="connect-card" target="_blank" rel="noopener noreferrer">
+      <img class="connect-card-icon" src="images/favicons/whatsapp.png" alt="WhatsApp" width="32" height="32">
+      <h3>Join The Communiti on WhatsApp</h3>
+      <p>A living, breathing group for people who believe in the power of collective work. No noise, just substance.</p>
+      <span class="handle">Join the group</span>
+    </a>
+    <a href="mailto:hello@majoriti.world" class="connect-card">
+      <img class="connect-card-icon" src="images/favicons/gmail.svg.webp" alt="Email" width="32" height="32">
+      <h3>Send us an email</h3>
+      <p>Have something to say, ask, or propose? We read everything.</p>
+      <span class="handle">hello@majoriti.world</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>Majoriti World Ltd. • Tel Aviv • Building infrastructure for collective work.</p>
+</footer>
+</main>
+
+<script>
+(function() {
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('nav-toggle');
+  if (nav && navToggle) {
+    navToggle.addEventListener('click', function() {
+      nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', nav.classList.contains('open'));
+      navToggle.setAttribute('aria-label', nav.classList.contains('open') ? 'Close menu' : 'Open menu');
+    });
+  }
+})();
+if (typeof lucide !== 'undefined') lucide.createIcons();
+</script>
+
+</body>
+</html>

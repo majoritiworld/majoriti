@@ -4,12 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Majoriti AI — Human-Centered AI Education</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 @font-face {
   font-family: 'Majoriti';
   src: url('fonts/majoriti.ttf') format('truetype');
   font-weight: normal;
+  font-style: normal;
+}
+
+/* Garet */
+@font-face {
+  font-family: 'Garet';
+  src: url('fonts/Garet Font/Garet-Book.woff2') format('woff2'),
+       url('fonts/Garet Font/Garet-Book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Garet';
+  src: url('fonts/Garet Font/Garet-Heavy.woff2') format('woff2'),
+       url('fonts/Garet Font/Garet-Heavy.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Restora Neue */
+@font-face {
+  font-family: 'Restora Neue';
+  src: url('fonts/Restora Neue Font/Fontspring-DEMO-restoraneue-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Restora Neue';
+  src: url('fonts/Restora Neue Font/Fontspring-DEMO-restoraneue-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Restora Neue';
+  src: url('fonts/Restora Neue Font/Fontspring-DEMO-restoraneue-bold.otf') format('opentype');
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -86,12 +122,13 @@ body {
 }
 
 .nav-links a {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--muted);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
   transition: color 0.2s;
 }
 
@@ -146,7 +183,7 @@ body {
   font-family: 'Restora Neue', 'Instrument Serif', serif;
   font-size: clamp(2.8rem, 7vw, 5rem);
   line-height: 1.05;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: -0.03em;
   max-width: 1040px;
   position: relative;
@@ -190,12 +227,13 @@ body {
 }
 
 .btn-secondary {
+  font-family: 'JetBrains Mono', monospace;
   display: inline-block;
   padding: 0.85rem 1.8rem;
   background: transparent;
   color: var(--paper);
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -222,7 +260,7 @@ body {
   font-family: 'Restora Neue', 'Instrument Serif', serif;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.15;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
 }
@@ -262,10 +300,11 @@ body {
 }
 
 .section-label {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--muted);
   margin-bottom: 1rem;
 }
@@ -357,7 +396,7 @@ body {
   font-family: 'Restora Neue', 'Instrument Serif', serif;
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   line-height: 1.2;
-  font-weight: 400;
+  font-weight: 700;
   color: var(--paper);
   margin-bottom: 1rem;
 }
@@ -394,10 +433,11 @@ body {
   opacity: 0.6;
 }
 .partners-section .section-label {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--muted);
   margin-bottom: 1rem;
 }
@@ -485,7 +525,7 @@ body {
   font-family: 'Restora Neue', 'Instrument Serif', serif;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.15;
-  font-weight: 400;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
@@ -517,12 +557,13 @@ body {
 }
 
 .btn-primary {
+  font-family: 'JetBrains Mono', monospace;
   display: inline-block;
   padding: 0.85rem 1.8rem;
   background: var(--accent);
   color: white;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -608,7 +649,7 @@ body {
 
 <!-- HERO -->
 <section class="hero">
-  <h1><span class="hero-accent">From 0 to 1</span><br>in a world moving from 1 to 1,000</h1>
+  <h1>in a world moving from 1 to 1,000<br><span class="hero-accent">From 0 to 1</span></h1>
   <p class="hero-lead">
     Majoriti is your partner in AI education. We design experiences that turn uncertainty into capability, one step at a time.
   </p>
@@ -731,7 +772,7 @@ body {
 
 <!-- CTA -->
 <section class="cta-section" id="cta">
-  <h2>Ready to go from 0 to 1?</h2>
+  <h2><strong>Ready to go from 0 to 1?</strong></h2>
   <p>
     The world won't slow down. But you don't have to figure it out alone. Let's build your AI fluency together.
   </p>
